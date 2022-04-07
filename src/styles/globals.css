@@ -1,0 +1,45 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/**/
+
+:root {
+  --canvas-size: 800px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.canvas {
+  display: grid;
+  width: calc(var(--canvas-size) / 1.25);
+  height: calc(var(--canvas-size) / 1.25);
+  border: 1px solid red;
+  grid-template-columns: repeat(60, 1fr);
+  margin: auto;
+}
+
+nav {
+  display: grid;
+  width: var(--canvas-size);
+  grid-template-columns: repeat(8, 1fr);
+  margin: auto;
+}
+nav div {
+  height: 30px;
+}
