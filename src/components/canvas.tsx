@@ -11,19 +11,19 @@ const Canvas = ({ pickedColor, index }: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
 
   useEffect(() => {
-    let hits: Object[] = [];
-    index
-      .browseObjects({
-        query: "",
-        batch: (batch: any) => {
-          hits = hits.concat(batch);
-        },
-      })
-      .then(() => {
-        setAllHits(hits);
-      });
-
-    const id = setInterval(() => index.search(""), 1000);
+    const id = setInterval(() => {
+      let hits: Object[] = [];
+      index
+        .browseObjects({
+          query: "",
+          batch: (batch: any) => {
+            hits = hits.concat(batch);
+          },
+        })
+        .then(() => {
+          setAllHits(hits);
+        });
+    }, 1000);
 
     return () => clearInterval(id);
   }, []);
