@@ -14,7 +14,7 @@ const Canvas = ({ pickedColor, index }: CanvasProps) => {
     let hits: Object[] = [];
     index
       .browseObjects({
-        query: "", // Empty query will match all records
+        query: "",
         batch: (batch: any) => {
           hits = hits.concat(batch);
         },
