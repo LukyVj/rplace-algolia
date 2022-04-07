@@ -5,9 +5,10 @@ import useInterval from "../hooks/useInterval";
 interface CanvasProps {
   pickedColor: string;
   index: any;
+  showGrid: boolean;
 }
 
-const Canvas = ({ pickedColor, index }: CanvasProps) => {
+const Canvas = ({ pickedColor, index, showGrid }: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
 
   useEffect(() => {
@@ -28,32 +29,31 @@ const Canvas = ({ pickedColor, index }: CanvasProps) => {
     return () => clearInterval(id);
   }, []);
   return (
-    <main className="canvas">
-      {allHits.map((hit: any) => {
-        const handleClick = (e: any, hit: any) => {
-          (e.target as HTMLDivElement).style.background = pickedColor;
-          index.saveObject({
-            objectID: hit.objectID,
-            bg_color: pickedColor,
-            id: hit.id,
-          });
-        };
-        return (
-          <div
-            data-cell-id={hit.id}
-            key={hit.objectID}
-            onClick={(e) => handleClick(e, hit)}
-            style={{
-              background: hit.bg_color,
-              border:
-                process.env.NODE_ENV === "development"
-                  ? "0.5px solid rgb(0 0 0 / 30%)"
-                  : "",
-            }}
-          />
-        );
-      })}
-    </main>
+    <>
+      <main className="canvas">
+        {allHits.map((hit: any) => {
+          const handleClick = (e: any, hit: any) => {
+            (e.target as HTMLDivElement).style.background = pickedColor;
+            index.saveObject({
+              objectID: hit.objectID,
+              bg_color: pickedColor,
+              id: hit.id,
+            });
+          };
+          return (
+            <div
+              data-cell-id={hit.id}
+              key={hit.objectID}
+              onClick={(e) => handleClick(e, hit)}
+              style={{
+                background: hit.bg_color,
+                border: showGrid ? "0.5px solid rgb(0 0 0 / 30%)" : "",
+              }}
+            />
+          );
+        })}
+      </main>
+    </>
   );
 };
 

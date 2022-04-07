@@ -6,6 +6,10 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+body {
+  height: 100vh;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -34,7 +38,7 @@ a {
   margin: auto;
 }
 
-nav {
+nav .palette {
   display: grid;
   width: var(--canvas-size);
   grid-template-columns: repeat(8, 1fr);
