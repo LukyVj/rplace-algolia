@@ -49,16 +49,14 @@ const Home: NextPage = () => {
      )}'/%3E%3Cpath d='m2 2 16 15-7.7.7 4.5 9.8-2.9 1.3-4.3-9.9L2 24V2m0-2c-.3 0-.5.1-.8.2C.5.5 0 1.2 0 2v22c0 .8.5 1.5 1.2 1.8.3.2.6.2.8.2.5 0 1-.2 1.4-.5l3.4-3.2 3.1 7.3c.2.5.6.9 1.1 1.1.2.1.5.1.7.1.3 0 .5-.1.8-.2l2.9-1.3c.5-.2.9-.6 1.1-1.1s.2-1.1 0-1.5l-3.3-7.2 4.9-.4c.8-.1 1.5-.6 1.7-1.3.3-.7.1-1.6-.5-2.1L3.3.7C3 .2 2.5 0 2 0z' style='fill:%23212121'/%3E%3C/svg%3E")10 10, auto} 
      `;
 
-  let socket;
+  let socket: any;
 
   const socketInitializer: any = async () => {
     // await fetch("/api/socket");
     socket = io();
 
-    console.log(Object.keys(socket.connected).length);
-
     socket.on("connect", () => {
-      console.log("connected");
+      console.log(Object.keys(socket.connected).length);
     });
   };
   useEffect(() => {
