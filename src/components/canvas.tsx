@@ -30,7 +30,6 @@ const Canvas = ({ pickedColor, index }: CanvasProps) => {
   return (
     <main className="canvas">
       {allHits.map((hit: any) => {
-        console.log(hit);
         const handleClick = (e: any, hit: any) => {
           (e.target as HTMLDivElement).style.background = pickedColor;
           index.saveObject({
