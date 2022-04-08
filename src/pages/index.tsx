@@ -34,6 +34,35 @@ const Home: NextPage = () => {
      )}'/%3E%3Cpath d='m2 2 16 15-7.7.7 4.5 9.8-2.9 1.3-4.3-9.9L2 24V2m0-2c-.3 0-.5.1-.8.2C.5.5 0 1.2 0 2v22c0 .8.5 1.5 1.2 1.8.3.2.6.2.8.2.5 0 1-.2 1.4-.5l3.4-3.2 3.1 7.3c.2.5.6.9 1.1 1.1.2.1.5.1.7.1.3 0 .5-.1.8-.2l2.9-1.3c.5-.2.9-.6 1.1-1.1s.2-1.1 0-1.5l-3.3-7.2 4.9-.4c.8-.1 1.5-.6 1.7-1.3.3-.7.1-1.6-.5-2.1L3.3.7C3 .2 2.5 0 2 0z' style='fill:%23212121'/%3E%3C/svg%3E")10 10, auto} 
      `;
 
+  /**
+   * Let's create a cooldown function.
+   * This function will be called when the user clicks on the canvas.
+   * It will prevent the user to click for the next 10 seconds.
+   */
+  const [cooldown, setCooldown] = useState(false);
+  const [cooldownTime, setCooldownTime] = useState(3);
+
+  useEffect(() => {
+    if (cooldown) {
+      let currentTime = cooldownTime - 1;
+      const interval = setInterval(() => {
+        if (currentTime === 0) {
+          setCooldown(false);
+          setCooldownTime(3);
+        } else {
+          setCooldownTime(currentTime--);
+        }
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [cooldown]);
+
+  /**
+   * The following code works fine on dev but not on prod.
+   * The following code is a workaround to get the socket.io client on prod.
+   * The code is not optimal but it works.
+   */
   const [userCount, setUserCount] = useState(0);
   useEffect(() => {
     fetch("/api/socket").finally(() => {
@@ -62,7 +91,7 @@ const Home: NextPage = () => {
         setUserCount(currentCount - 1);
       });
     });
-  }, []); // Added [] as
+  }, []);
   return (
     <div className={styles.container}>
       <Head>
@@ -91,18 +120,23 @@ const Home: NextPage = () => {
         </h1>
 
         <div style={{ textAlign: "left", margin: ".5em auto" }}>
-          Connected users:{" "}
-          <span
-            style={{
-              display: "inline-block",
-              width: 10,
-              height: 10,
-              borderRadius: "100px",
-              background: "linear-gradient(to top, #02BE01, #94E044)",
-              marginRight: 5,
-            }}
-          />
-          {userCount}
+          <div>
+            <b>Connected users:</b>{" "}
+            <span
+              style={{
+                display: "inline-block",
+                width: 10,
+                height: 10,
+                borderRadius: "100px",
+                background: "linear-gradient(to top, #02BE01, #94E044)",
+                marginRight: 5,
+              }}
+            />
+            {userCount}
+          </div>
+          <div>
+            <b>Cooldown:</b> {cooldownTime}s
+          </div>
         </div>
       </header>
 
@@ -111,11 +145,18 @@ const Home: NextPage = () => {
           indexName="algolia_canvas_place"
           searchClient={searchClient}
         >
-          <Canvas pickedColor={pickedColor} index={index} showGrid={showGrid} />
+          <Canvas
+            pickedColor={pickedColor}
+            index={index}
+            showGrid={showGrid}
+            setCooldown={setCooldown}
+            cooldown={cooldown}
+          />
           <Palette
             setPickedColor={setPickedColor}
             setShowGrid={setShowGrid}
             showGrid={showGrid}
+            cooldown={cooldown}
           />
         </InstantSearch>
       </div>

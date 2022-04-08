@@ -5,11 +5,17 @@ interface PaletteProps {
   setPickedColor: (e: any) => void;
   setShowGrid: (e: any) => void;
   showGrid: boolean;
+  cooldown: boolean;
 }
 
 const PALETTE_HEIGHT = 80;
 
-const Palette = ({ setPickedColor, setShowGrid, showGrid }: PaletteProps) => {
+const Palette = ({
+  setPickedColor,
+  setShowGrid,
+  showGrid,
+  cooldown,
+}: PaletteProps) => {
   return (
     <nav
       style={{
@@ -18,6 +24,8 @@ const Palette = ({ setPickedColor, setShowGrid, showGrid }: PaletteProps) => {
         width: "calc(var(--canvas-size)/1.25)",
         margin: "1em auto",
         height: PALETTE_HEIGHT,
+        pointerEvents: cooldown ? "none" : "all",
+        opacity: cooldown ? 0.5 : 1,
       }}
     >
       <button

@@ -6,9 +6,17 @@ interface CanvasProps {
   pickedColor: string;
   index: any;
   showGrid: boolean;
+  setCooldown: (e: any) => void;
+  cooldown: boolean;
 }
 
-const Canvas = ({ pickedColor, index, showGrid }: CanvasProps) => {
+const Canvas = ({
+  pickedColor,
+  index,
+  showGrid,
+  setCooldown,
+  cooldown,
+}: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
 
   useEffect(() => {
@@ -28,18 +36,23 @@ const Canvas = ({ pickedColor, index, showGrid }: CanvasProps) => {
 
     return () => clearInterval(id);
   }, []);
+
+  const handleClick = (e: any, hit: any) => {
+    if (!cooldown) {
+      (e.target as HTMLDivElement).style.background = pickedColor;
+      index.saveObject({
+        objectID: hit.objectID,
+        bg_color: pickedColor,
+        id: hit.id,
+      });
+      setCooldown(true);
+    }
+  };
+
   return (
     <>
       <main className="canvas">
         {allHits.map((hit: any) => {
-          const handleClick = (e: any, hit: any) => {
-            (e.target as HTMLDivElement).style.background = pickedColor;
-            index.saveObject({
-              objectID: hit.objectID,
-              bg_color: pickedColor,
-              id: hit.id,
-            });
-          };
           return (
             <div
               data-cell-id={hit.id}
