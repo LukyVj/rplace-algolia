@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "create_canvas": "node ./src/scripts/create_canvas.js",
     "snapshot": "node ./src/scripts/snapshot.js"
   },
   "dependencies": {

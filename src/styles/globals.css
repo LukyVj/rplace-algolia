@@ -24,6 +24,58 @@ body {
 
 body {
   height: 100vh;
+  background-color: transparent;
+  background-image: linear-gradient(
+      0deg,
+      transparent 9%,
+      rgba(0, 0, 0, 0.03) 10%,
+      rgba(0, 0, 0, 0.03) 12%,
+      transparent 13%,
+      transparent 29%,
+      rgba(0, 0, 0, 0.03) 30%,
+      rgba(0, 0, 0, 0.03) 31%,
+      transparent 32%,
+      transparent 49%,
+      rgba(0, 0, 0, 0.03) 50%,
+      rgba(0, 0, 0, 0.03) 51%,
+      transparent 52%,
+      transparent 69%,
+      rgba(0, 0, 0, 0.03) 70%,
+      rgba(0, 0, 0, 0.03) 71%,
+      transparent 72%,
+      transparent 89%,
+      rgba(0, 0, 0, 0.03) 90%,
+      rgba(0, 0, 0, 0.03) 91%,
+      transparent 92%,
+      transparent
+    ),
+    linear-gradient(
+      90deg,
+      transparent 9%,
+      rgba(0, 0, 0, 0.03) 10%,
+      rgba(0, 0, 0, 0.03) 12%,
+      transparent 13%,
+      transparent 29%,
+      rgba(0, 0, 0, 0.03) 30%,
+      rgba(0, 0, 0, 0.03) 31%,
+      transparent 32%,
+      transparent 49%,
+      rgba(0, 0, 0, 0.03) 50%,
+      rgba(0, 0, 0, 0.03) 51%,
+      transparent 52%,
+      transparent 69%,
+      rgba(0, 0, 0, 0.03) 70%,
+      rgba(0, 0, 0, 0.03) 71%,
+      transparent 72%,
+      transparent 89%,
+      rgba(0, 0, 0, 0.03) 90%,
+      rgba(0, 0, 0, 0.03) 91%,
+      transparent 92%,
+      transparent
+    );
+
+  height: 100%;
+  background-size: 50px 50px;
 }
 
 a {
