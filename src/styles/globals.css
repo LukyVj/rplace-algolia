@@ -2,8 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Courier New", Courier, monospace;
 }
 
 body {
@@ -41,9 +40,6 @@ a {
 nav .palette {
   display: grid;
   width: var(--canvas-size);
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(16, 1fr);
   margin: auto;
-}
-nav div {
-  height: 30px;
 }

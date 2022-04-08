@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { colors } from "../data/colors";
 
 interface PaletteProps {
   setPickedColor: (e: any) => void;
@@ -6,30 +7,27 @@ interface PaletteProps {
   showGrid: boolean;
 }
 
-const Palette = ({ setPickedColor, setShowGrid, showGrid }: PaletteProps) => {
-  const colors = [
-    "#FFFFFF",
-    "#E4E4E4",
-    "#888888",
-    "#222222",
-    "#FFA7D1",
-    "#E50000",
-    "#E59500",
-    "#A06A42",
-    "#E5D900",
-    "#94E044",
-    "#02BE01",
-    "#00D3DD",
-    "#0083C7",
-    "#0000EA",
-    "#CF6EE4",
-    "#820080",
-  ];
-  return (
-    <nav style={{ height: 100 }}>
-      <button onClick={() => setShowGrid(!showGrid)}>Show grid</button>
+const PALETTE_HEIGHT = 80;
 
-      <div className="palette" style={{ padding: "10px 0" }}>
+const Palette = ({ setPickedColor, setShowGrid, showGrid }: PaletteProps) => {
+  return (
+    <nav
+      style={{
+        display: "flex",
+        alignItems: "center",
+        width: "calc(var(--canvas-size)/1.25)",
+        margin: "1em auto",
+        height: PALETTE_HEIGHT,
+      }}
+    >
+      <button
+        style={{ height: PALETTE_HEIGHT, marginRight: 10 }}
+        onClick={() => setShowGrid(!showGrid)}
+      >
+        Show grid
+      </button>
+
+      <div className="palette">
         {colors.map((color) => (
           <button
             key={color}
@@ -40,10 +38,9 @@ const Palette = ({ setPickedColor, setShowGrid, showGrid }: PaletteProps) => {
             data-color={color}
             style={{
               background: color,
-              height: 20,
+              height: PALETTE_HEIGHT / 2,
               appearance: "none",
               border: "1px solid rgb(0 0 0 / 20%)",
-              marginBottom: 10,
             }}
           />
         ))}
