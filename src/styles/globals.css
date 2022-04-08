@@ -1,6 +1,12 @@
 :root {
-  --canvas-size: 800px;
+  --canvas-size: 600px;
   --algolia-brand: #5468ff;
+}
+
+@media (min-width: 960px) {
+  :root {
+    --canvas-size: 800px;
+  }
 }
 
 html,
