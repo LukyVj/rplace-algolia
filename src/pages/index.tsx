@@ -11,7 +11,7 @@ import { InstantSearch, connectSearchBox } from "react-instantsearch-dom";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 
-const COOLDOWN_SECONDS = 1;
+const COOLDOWN_SECONDS = 0;
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
   process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!,
@@ -133,7 +133,14 @@ const Home: NextPage = () => {
             {userCount}
           </div>
           <div>
-            <b>Cooldown:</b> {cooldownTime}s
+            <b>Cooldown:</b>{" "}
+            {COOLDOWN_SECONDS === 0 ? (
+              <>
+                <s>{cooldownTime}s</s> No cooldown for cool kids
+              </>
+            ) : (
+              <span>{cooldownTime}s</span>
+            )}
           </div>
         </div>
       </header>
