@@ -87,7 +87,7 @@ const Canvas = ({
               onMouseOver={(e) => handleMouseOver(e, hit)}
               data-cell-id={hit.id}
               key={hit.objectID}
-              onClick={(e) => handleClickThroughApiRoute(e, hit)}
+              onClick={(e) => handleClick(e, hit)}
               style={{
                 background: hit.bg_color,
                 border: showGrid ? "0.5px solid rgb(0 0 0 / 30%)" : "",
