@@ -136,7 +136,7 @@ const Home: NextPage = () => {
             <b>Cooldown:</b>{" "}
             {COOLDOWN_SECONDS === 0 ? (
               <>
-                <s>{cooldownTime}s</s> No cooldown for cool kids
+                <s>0s</s> No cooldown for cool kids
               </>
             ) : (
               <span>{cooldownTime}s</span>
