@@ -150,9 +150,10 @@ const Home: NextPage = () => {
             )}
           </div>
           <div>
+            <b>Current cell</b>:
             {currentHit !== null && (
               <>
-                <b>Current cell</b>: <span> {currentHit.id}</span> -{" "}
+                <span> {currentHit.id}</span> -{" "}
                 <span
                   style={{
                     background: currentHit.bg_color,
