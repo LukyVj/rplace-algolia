@@ -9,6 +9,12 @@
   }
 }
 
+@media (min-width: 1200px) {
+  :root {
+    --canvas-size: 900px;
+  }
+}
+
 html,
 body {
   padding: 0;
