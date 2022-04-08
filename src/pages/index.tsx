@@ -45,6 +45,10 @@ const Home: NextPage = () => {
   const [hasCooldown, setHasCooldown] = useState(
     COOLDOWN_SECONDS === 0 ? false : true
   );
+  const [currentHit, setCurrentHit] = useState<{
+    id: number;
+    bg_color: string;
+  } | null>(null);
 
   useEffect(() => {
     if (cooldown) {
@@ -145,6 +149,21 @@ const Home: NextPage = () => {
               <span>{cooldownTime}s</span>
             )}
           </div>
+          <div>
+            {currentHit !== null && (
+              <>
+                <b>Current cell</b>: <span> {currentHit.id}</span> -{" "}
+                <span
+                  style={{
+                    background: currentHit.bg_color,
+                    display: "inline-block",
+                    padding: 5,
+                  }}
+                ></span>
+                {currentHit.bg_color}
+              </>
+            )}
+          </div>
         </div>
       </header>
 
@@ -160,6 +179,7 @@ const Home: NextPage = () => {
             setCooldown={setCooldown}
             cooldown={cooldown}
             hasCooldown={hasCooldown}
+            setCurrentHit={setCurrentHit}
           />
           <Palette
             setPickedColor={setPickedColor}

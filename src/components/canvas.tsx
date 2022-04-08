@@ -9,6 +9,7 @@ interface CanvasProps {
   setCooldown: (e: any) => void;
   cooldown: boolean;
   hasCooldown: boolean;
+  setCurrentHit: (e: any) => void;
 }
 
 const Canvas = ({
@@ -18,6 +19,7 @@ const Canvas = ({
   setCooldown,
   cooldown,
   hasCooldown,
+  setCurrentHit,
 }: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
 
@@ -58,12 +60,17 @@ const Canvas = ({
     }
   };
 
+  const handleMouseOver = (e: any, hit: any) => {
+    setCurrentHit(hit);
+  };
+
   return (
     <>
       <main className="canvas">
         {allHits.map((hit: any) => {
           return (
             <div
+              onMouseOver={(e) => handleMouseOver(e, hit)}
               data-cell-id={hit.id}
               key={hit.objectID}
               onClick={(e) => handleClick(e, hit)}
