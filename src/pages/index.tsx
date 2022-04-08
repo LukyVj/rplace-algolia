@@ -42,6 +42,9 @@ const Home: NextPage = () => {
    */
   const [cooldown, setCooldown] = useState(false);
   const [cooldownTime, setCooldownTime] = useState(COOLDOWN_SECONDS);
+  const [hasCooldown, setHasCooldown] = useState(
+    COOLDOWN_SECONDS === 0 ? false : true
+  );
 
   useEffect(() => {
     if (cooldown) {

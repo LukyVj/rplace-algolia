@@ -8,6 +8,7 @@ interface CanvasProps {
   showGrid: boolean;
   setCooldown: (e: any) => void;
   cooldown: boolean;
+  hasCooldown: boolean;
 }
 
 const Canvas = ({
@@ -16,6 +17,7 @@ const Canvas = ({
   showGrid,
   setCooldown,
   cooldown,
+  hasCooldown,
 }: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
 
@@ -38,7 +40,7 @@ const Canvas = ({
   }, []);
 
   const handleClick = (e: any, hit: any) => {
-    if (!cooldown) {
+    if (hasCooldown && !cooldown) {
       (e.target as HTMLDivElement).style.background = pickedColor;
       index.saveObject({
         objectID: hit.objectID,
@@ -46,6 +48,13 @@ const Canvas = ({
         id: hit.id,
       });
       setCooldown(true);
+    } else {
+      (e.target as HTMLDivElement).style.background = pickedColor;
+      index.saveObject({
+        objectID: hit.objectID,
+        bg_color: pickedColor,
+        id: hit.id,
+      });
     }
   };
 

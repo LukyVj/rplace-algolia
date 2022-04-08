@@ -6,6 +6,7 @@ interface PaletteProps {
   setShowGrid: (e: any) => void;
   showGrid: boolean;
   cooldown: boolean;
+  hasCooldown: boolean;
 }
 
 const PALETTE_HEIGHT = 80;
@@ -15,6 +16,7 @@ const Palette = ({
   setShowGrid,
   showGrid,
   cooldown,
+  hasCooldown,
 }: PaletteProps) => {
   return (
     <nav
@@ -24,8 +26,8 @@ const Palette = ({
         width: "calc(var(--canvas-size)/1.25)",
         margin: "1em auto",
         height: PALETTE_HEIGHT,
-        pointerEvents: cooldown ? "none" : "all",
-        opacity: cooldown ? 0.5 : 1,
+        pointerEvents: hasCooldown && cooldown ? "none" : "all",
+        opacity: hasCooldown && cooldown ? 0.5 : 1,
       }}
     >
       <button
