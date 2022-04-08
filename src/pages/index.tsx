@@ -37,7 +37,11 @@ const Home: NextPage = () => {
   const [userCount, setUserCount] = useState(0);
   useEffect(() => {
     fetch("/api/socket").finally(() => {
-      const socket = io();
+      const socket = io(
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:3000"
+          : "https://rplace-with-algolia.vercel.app/"
+      );
       let currentCount = userCount;
 
       socket.on("connect", () => {
