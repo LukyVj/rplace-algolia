@@ -10,9 +10,10 @@ const searchClient = algoliasearch(
     requestsCache: createNullCache(),
   }
 );
-const index = searchClient.initIndex("algolia_canvas_place");
+const index = searchClient.initIndex("algolia_canvas_place_test");
 
 export default function indexData(req: NextApiRequest, res: NextApiResponse) {
+  console.log(req.body);
   res.send({ body: JSON.parse(req.body) });
   index.saveObject({
     objectID: JSON.parse(req.body).objectID,

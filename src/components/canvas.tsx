@@ -10,6 +10,7 @@ interface CanvasProps {
   cooldown: boolean;
   hasCooldown: boolean;
   setCurrentHit: (e: any) => void;
+  useApiRoute?: boolean;
 }
 
 const Canvas = ({
@@ -20,6 +21,7 @@ const Canvas = ({
   cooldown,
   hasCooldown,
   setCurrentHit,
+  useApiRoute,
 }: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
 
@@ -87,7 +89,11 @@ const Canvas = ({
               onMouseOver={(e) => handleMouseOver(e, hit)}
               data-cell-id={hit.id}
               key={hit.objectID}
-              onClick={(e) => handleClick(e, hit)}
+              onClick={(e) =>
+                useApiRoute
+                  ? handleClickThroughApiRoute(e, hit)
+                  : handleClick(e, hit)
+              }
               style={{
                 background: hit.bg_color,
                 border: showGrid ? "0.5px solid rgb(0 0 0 / 30%)" : "",
