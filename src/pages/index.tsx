@@ -159,12 +159,14 @@ const Home: NextPage = () => {
             showGrid={showGrid}
             setCooldown={setCooldown}
             cooldown={cooldown}
+            hasCooldown={hasCooldown}
           />
           <Palette
             setPickedColor={setPickedColor}
             setShowGrid={setShowGrid}
             showGrid={showGrid}
             cooldown={cooldown}
+            hasCooldown={hasCooldown}
           />
         </InstantSearch>
       </div>
