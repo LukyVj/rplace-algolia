@@ -47,6 +47,8 @@ const Home: NextPage = () => {
       socket.on("connect", () => {
         console.log("connect");
         socket.emit("hello");
+        setUserCount(currentCount + 1);
+        console.log(userCount);
       });
 
       socket.on("a user connected", () => {
@@ -81,7 +83,7 @@ const Home: NextPage = () => {
           r/<s>place</s>
           <span style={{ color: "#5468FF" }}>algolia</span>
         </h1>
-        {userCount}
+        <div>Connected users: {userCount}</div>
       </header>
 
       <div>
