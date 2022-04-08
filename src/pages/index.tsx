@@ -11,7 +11,7 @@ import { InstantSearch, connectSearchBox } from "react-instantsearch-dom";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 
-const COOLDOWN_SECONDS = 2;
+const COOLDOWN_SECONDS = 1;
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
   process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!,
@@ -47,7 +47,7 @@ const Home: NextPage = () => {
     if (cooldown) {
       let currentTime = cooldownTime - 1;
       const interval = setInterval(() => {
-        if (currentTime === 0) {
+        if (currentTime === -1) {
           setCooldown(false);
           setCooldownTime(COOLDOWN_SECONDS);
         } else {
@@ -76,9 +76,6 @@ const Home: NextPage = () => {
 
       socket.on("connect", () => {
         console.log("connect");
-        socket.emit("hello");
-        setUserCount(currentCount + 1);
-        console.log(userCount);
       });
 
       socket.on("a user connected", () => {
@@ -170,8 +167,8 @@ const Home: NextPage = () => {
         Check the code on{" "}
         <a href="https://github.com/LukyVj/rplace-algolia">GitHub</a> - Read
         about it{" "}
-        <a href="https://medium.com/@lukyvj/rplace-algolia-a-pixel-war-on-algolia-and-algolia-canvas-b8f9f9f9f9f9">
-          here
+        <a href="#">
+          <s>here</s>
         </a>
       </footer>
     </div>
