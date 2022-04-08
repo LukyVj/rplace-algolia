@@ -1,3 +1,8 @@
+:root {
+  --canvas-size: 800px;
+  --algolia-brand: #5468ff;
+}
+
 html,
 body {
   padding: 0;
@@ -10,18 +15,9 @@ body {
 }
 
 a {
-  color: inherit;
+  color: var(--algolia-brand);
   text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-/**/
-
-:root {
-  --canvas-size: 800px;
+  font-weight: 600;
 }
 
 * {

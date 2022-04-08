@@ -11,6 +11,7 @@ import { InstantSearch, connectSearchBox } from "react-instantsearch-dom";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 
+const COOLDOWN_SECONDS = 2;
 const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
   process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!,
@@ -37,10 +38,10 @@ const Home: NextPage = () => {
   /**
    * Let's create a cooldown function.
    * This function will be called when the user clicks on the canvas.
-   * It will prevent the user to click for the next 10 seconds.
+   * It will prevent the user to click for the next 3 seconds.
    */
   const [cooldown, setCooldown] = useState(false);
-  const [cooldownTime, setCooldownTime] = useState(3);
+  const [cooldownTime, setCooldownTime] = useState(COOLDOWN_SECONDS);
 
   useEffect(() => {
     if (cooldown) {
@@ -48,7 +49,7 @@ const Home: NextPage = () => {
       const interval = setInterval(() => {
         if (currentTime === 0) {
           setCooldown(false);
-          setCooldownTime(3);
+          setCooldownTime(COOLDOWN_SECONDS);
         } else {
           setCooldownTime(currentTime--);
         }
@@ -116,7 +117,7 @@ const Home: NextPage = () => {
       >
         <h1>
           r/<s>place</s>
-          <span style={{ color: "#5468FF" }}>algolia</span>
+          <span style={{ color: "var(--algolia-brand)" }}>algolia</span>
         </h1>
 
         <div style={{ textAlign: "left", margin: ".5em auto" }}>
@@ -160,11 +161,18 @@ const Home: NextPage = () => {
           />
         </InstantSearch>
       </div>
-      <footer style={{ textAlign: "center" }}>
+      <footer
+        style={{ textAlign: "center", padding: "1em 0", lineHeight: "2" }}
+      >
+        A silly experiment by <a href="https://twitter.com/lukyvj">@lukyvj</a> -{" "}
         Fully powered by <a href="https://algolia.com">Algolia</a>
         <br />
         Check the code on{" "}
-        <a href="https://github.com/LukyVj/rplace-algolia">GitHub</a>
+        <a href="https://github.com/LukyVj/rplace-algolia">GitHub</a> - Read
+        about it{" "}
+        <a href="https://medium.com/@lukyvj/rplace-algolia-a-pixel-war-on-algolia-and-algolia-canvas-b8f9f9f9f9f9">
+          here
+        </a>
       </footer>
     </div>
   );

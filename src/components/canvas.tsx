@@ -32,7 +32,7 @@ const Canvas = ({
         .then(() => {
           setAllHits(hits);
         });
-    }, 1000);
+    }, 600);
 
     return () => clearInterval(id);
   }, []);
