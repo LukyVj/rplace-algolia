@@ -1,5 +1,5 @@
 :root {
-  --canvas-size: 600px;
+  --canvas-size: 100vw;
   --algolia-brand: #5468ff;
 }
 

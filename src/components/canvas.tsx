@@ -60,6 +60,20 @@ const Canvas = ({
     }
   };
 
+  /**
+   * The following code works fine on dev but not on prod.
+   */
+  const handleClickThroughApiRoute = async (e: any, hit: any) => {
+    await fetch(`/api/indexData`, {
+      method: "POST",
+      body: JSON.stringify({
+        objectID: hit.objectID,
+        bg_color: pickedColor,
+        id: hit.id,
+      }),
+    });
+  };
+
   const handleMouseOver = (e: any, hit: any) => {
     setCurrentHit(hit);
   };
@@ -73,7 +87,7 @@ const Canvas = ({
               onMouseOver={(e) => handleMouseOver(e, hit)}
               data-cell-id={hit.id}
               key={hit.objectID}
-              onClick={(e) => handleClick(e, hit)}
+              onClick={(e) => handleClickThroughApiRoute(e, hit)}
               style={{
                 background: hit.bg_color,
                 border: showGrid ? "0.5px solid rgb(0 0 0 / 30%)" : "",
