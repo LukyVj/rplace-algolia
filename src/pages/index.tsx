@@ -73,28 +73,27 @@ const Home: NextPage = () => {
    */
   const [userCount, setUserCount] = useState(0);
   useEffect(() => {
-    fetch("/api/socket").finally(() => {
-      const socket = io(
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:3000"
-          : "https://rplace-with-algolia.vercel.app/"
-      );
-      let currentCount = userCount;
+    const socket = io(
+      process.env.NODE_ENV === "production"
+        ? "https://rplace-algolia-heroku-server.herokuapp.com/"
+        : "http://localhost:3001",
+      { transports: ["websocket"] }
+    );
+    let currentCount = userCount;
 
-      socket.on("connect", () => {
-        console.log("connect");
-      });
+    socket.on("connect", () => {
+      console.log("connect");
+    });
 
-      socket.on("a user connected", () => {
-        console.log("a user connected");
-        setUserCount(currentCount + 1);
-        console.log(userCount);
-      });
+    socket.on("clients", (e) => {
+      console.log("clients", e);
+      setUserCount(e);
+      console.log(userCount);
+    });
 
-      socket.on("disconnect", () => {
-        console.log("disconnect");
-        setUserCount(currentCount - 1);
-      });
+    socket.on("disconnect", () => {
+      setUserCount(currentCount--);
+      console.log("disconnect");
     });
   }, []);
   return (
