@@ -36,12 +36,19 @@ const Home: NextPage = () => {
      `;
 
   useEffect(() => {
-    fetch("api/socket")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setUserCount(data);
+    // fetch("api/socket")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     setUserCount(data);
+    //   });
+    fetch("/api/socket").finally(() => {
+      const socket = io();
+
+      socket.on("counter", function (data) {
+        console.log(data.count);
       });
+    });
   }, []); // Added [] as useEffect filter so it will be executed only once, when component is mounted
 
   return (

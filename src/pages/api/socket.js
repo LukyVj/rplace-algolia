@@ -2,18 +2,38 @@ import { Server } from "socket.io";
 
 const ioHandler = (req, res) => {
   if (!res.socket.server.io) {
-    let clientsCount = 0;
+    var count = 0;
+
+    var $ipsConnected = [];
     console.log("*First use, starting socket.io");
 
     const io = new Server(res.socket.server);
 
-    io.sockets.on("connection", function (socket) {
-      var clients = io.sockets.server.engine.clientsCount;
-      console.log("clients: " + clients);
-      clientsCount = clients;
-    });
+    io.on("connection", function (socket) {
+      var $ipAddress = socket.handshake.address;
 
-    res.send({ clientsCount });
+      if (!$ipsConnected.hasOwnProperty($ipAddress)) {
+        $ipsConnected[$ipAddress] = 1;
+
+        count++;
+
+        socket.emit("counter", { count: count });
+      }
+
+      console.log("client is connected");
+
+      /* Disconnect socket */
+
+      socket.on("disconnect", function () {
+        if ($ipsConnected.hasOwnProperty($ipAddress)) {
+          delete $ipsConnected[$ipAddress];
+
+          count--;
+
+          socket.emit("counter", { count: count });
+        }
+      });
+    });
   } else {
     console.log("socket.io already running");
   }
