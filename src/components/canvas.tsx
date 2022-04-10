@@ -43,22 +43,21 @@ const Canvas = ({
     return () => clearInterval(id);
   }, []);
 
+  const indexData = (e, hit) => {
+    (e.target as HTMLDivElement).style.background = pickedColor;
+    index.saveObject({
+      objectID: hit.objectID,
+      bg_color: pickedColor,
+      id: hit.id,
+    });
+  };
+
   const handleClick = (e: any, hit: any) => {
     if (hasCooldown && !cooldown) {
-      (e.target as HTMLDivElement).style.background = pickedColor;
-      index.saveObject({
-        objectID: hit.objectID,
-        bg_color: pickedColor,
-        id: hit.id,
-      });
+      indexData(e, hit);
       setCooldown(true);
     } else {
-      (e.target as HTMLDivElement).style.background = pickedColor;
-      index.saveObject({
-        objectID: hit.objectID,
-        bg_color: pickedColor,
-        id: hit.id,
-      });
+      indexData(e, hit);
     }
   };
 
@@ -66,6 +65,7 @@ const Canvas = ({
    * The following code works fine on dev but not on prod.
    */
   const handleClickThroughApiRoute = async (e: any, hit: any) => {
+    (e.target as HTMLDivElement).style.background = pickedColor;
     await fetch(`/api/indexData`, {
       method: "POST",
       body: JSON.stringify({
