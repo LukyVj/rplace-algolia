@@ -36,5 +36,5 @@ yarn-error.log*
 *.tsbuildinfo
 
 # Snapshots
-./src/snapshots/*
-./src/snapshots_arry/*
+/src/snapshots/
+/src/snapshots_array/

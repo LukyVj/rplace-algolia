@@ -6,8 +6,8 @@ interface HeaderProps {
     id: number;
     bg_color: string;
   } | null;
-  COOLDOWN_SECONDS: number;
-  cooldownTime: number;
+  COOLDOWN_SECONDS?: number;
+  cooldownTime?: number;
 }
 
 const Header = ({

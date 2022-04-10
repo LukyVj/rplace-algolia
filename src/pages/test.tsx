@@ -25,7 +25,7 @@ const INDEX_NAME = "algolia_canvas_place_test";
 
 const index = searchClient.initIndex(INDEX_NAME);
 
-const Home: NextPage = () => {
+const Test: NextPage = () => {
   const [pickedColor, setPickedColor] = useState("#FFFFFF");
   const [showGrid, setShowGrid] = useState(false);
 
@@ -158,4 +158,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Test;
