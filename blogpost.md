@@ -18,3 +18,7 @@ Now, 100 pixels is a bit small, but that was a good a start.
 # Scaling the canvas up
 
 Now, I've added a "few" more hits to the index, and I've scaled the canvas up to a grid containing 4020 pixels.
+
+# Making the canvas interactive
+
+# Hiding API keys
