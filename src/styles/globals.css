@@ -97,6 +97,11 @@ a {
   margin: auto;
 }
 
+.canvas > div[data-cell-id]:hover {
+  transform: scale(1.5);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 15%);
+}
+
 nav .palette {
   display: grid;
   width: var(--canvas-size);
