@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import useInterval from "../hooks/useInterval";
+import { hitType } from "../types/hit";
 
 interface CanvasProps {
   pickedColor: string;
@@ -43,7 +44,7 @@ const Canvas = ({
     return () => clearInterval(id);
   }, []);
 
-  const indexData = (e, hit) => {
+  const indexData = (e: any, hit: hitType) => {
     (e.target as HTMLDivElement).style.background = pickedColor;
     index.saveObject({
       objectID: hit.objectID,
@@ -52,7 +53,7 @@ const Canvas = ({
     });
   };
 
-  const handleClick = (e: any, hit: any) => {
+  const handleClick = (e: any, hit: hitType) => {
     if (hasCooldown && !cooldown) {
       indexData(e, hit);
       setCooldown(true);
@@ -64,7 +65,7 @@ const Canvas = ({
   /**
    * The following code works fine on dev but not on prod.
    */
-  const handleClickThroughApiRoute = async (e: any, hit: any) => {
+  const handleClickThroughApiRoute = async (e: any, hit: hitType) => {
     (e.target as HTMLDivElement).style.background = pickedColor;
     await fetch(`/api/indexData`, {
       method: "POST",
@@ -76,7 +77,7 @@ const Canvas = ({
     });
   };
 
-  const handleMouseOver = (e: any, hit: any) => {
+  const handleMouseOver = (hit: hitType) => {
     setCurrentHit(hit);
   };
 
@@ -86,7 +87,7 @@ const Canvas = ({
         {allHits.map((hit: any) => {
           return (
             <div
-              onMouseOver={(e) => handleMouseOver(e, hit)}
+              onMouseOver={(e) => handleMouseOver(hit)}
               data-cell-id={hit.id}
               key={hit.objectID}
               onClick={(e) =>
