@@ -23,3 +23,5 @@ Then I use the power of CSS grid to display the hits in a grid. In a pixelated w
 That this is a demo. It is not meant to be used in production. And it's easy to hack it because the custom `API_KEY` to search/index/browse the objects is exposed on the client.
 
 There is also a way to achieve it through the NextJS API pages, but it's kind of longer and definitely breaks the playfulness of the demo.
+
+Also note that hosting your functions in a region closer to the client is better.
