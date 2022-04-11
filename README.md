@@ -8,7 +8,7 @@ The idea is that every pixel is basically a hit. When you click on a pixel, it w
 
 The index contains exactly 4020 hits, and this is what every hit contains:
 
-```
+```json
 {
   "bg_color":"#000000",
   "id":1,
