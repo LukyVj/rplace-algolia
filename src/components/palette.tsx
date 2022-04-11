@@ -54,7 +54,7 @@ const Palette = ({
       />
       <div className="mt-24">
         <Button
-          style={{ height: PALETTE_HEIGHT, marginRight: 10 }}
+          style={{ height: PALETTE_HEIGHT }}
           onClick={() => setShowGrid(!showGrid)}
         >
           Show grid

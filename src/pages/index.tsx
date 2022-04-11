@@ -107,6 +107,7 @@ const Home: NextPage = () => {
 
     console.log(allSnapshots);
   }, []);
+
   return (
     <div>
       <Head>
@@ -152,7 +153,10 @@ const Home: NextPage = () => {
                   setSelectedSnapshot((e.target as any).value);
                 }}
               />
-              <time>{allSnapshots[selectedSnapshot].dateAdded}</time>
+              <p>State of the canvas on:</p>
+              <time>
+                <b>{allSnapshots[selectedSnapshot].dateAdded}</b>
+              </time>
             </>
           ) : (
             <Palette

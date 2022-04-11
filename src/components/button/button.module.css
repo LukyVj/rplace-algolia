@@ -7,30 +7,6 @@
   transition: linear 0.2s;
 }
 
-.pixel:before {
-  content: " ";
-  position: absolute;
-  top: -0.25em;
-  left: -0.25em;
-  width: 0.625em;
-  height: 0.625em;
-  background: white;
-  border-bottom: solid 0.25em #000;
-  border-right: solid 0.25em #000;
-}
-
-.pixel:after {
-  content: " ";
-  position: absolute;
-  bottom: -0.25em;
-  right: -0.25em;
-  width: 0.625em;
-  height: 0.625em;
-  background: white;
-  border-top: solid 0.25em #000;
-  border-left: solid 0.25em #000;
-}
-
 .square:before,
 .square:after {
   display: none;
