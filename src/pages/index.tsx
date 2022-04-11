@@ -87,7 +87,7 @@ const Home: NextPage = () => {
 
     socket.on("clients", (e) => {
       console.log("clients", e);
-      setUserCount(e / 2);
+      setUserCount(e);
       console.log(userCount);
     });
 
