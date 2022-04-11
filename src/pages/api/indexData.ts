@@ -10,7 +10,9 @@ const searchClient = algoliasearch(
     requestsCache: createNullCache(),
   }
 );
-const index = searchClient.initIndex("algolia_canvas_place_test");
+const index = searchClient.initIndex(
+  process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME!
+);
 
 export default function indexData(req: NextApiRequest, res: NextApiResponse) {
   console.log(req.body);

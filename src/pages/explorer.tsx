@@ -11,15 +11,7 @@ import io from "socket.io-client";
 import Header from "../components/header";
 import { snaptshotType } from "../types/snaptshot";
 import Canvas from "../components/canvas";
-
-const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
-  process.env.NEXT_PUBLIC_ALGOLIA_API_KEY_SNAPSHOT!,
-  {
-    responsesCache: createNullCache(),
-    requestsCache: createNullCache(),
-  }
-);
+import { searchClient } from "../scripts/algolia";
 
 const index = searchClient.initIndex("algolia_canvas_place_snapshots");
 

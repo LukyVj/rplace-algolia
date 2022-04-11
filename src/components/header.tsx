@@ -18,9 +18,9 @@ const Header = ({
 }: HeaderProps) => {
   return (
     <header
+      className="w-800"
       style={{
         textAlign: "center",
-        width: "calc(var(--canvas-size)/1.25)",
         margin: "auto",
       }}
     >
@@ -33,7 +33,7 @@ const Header = ({
         </Link>
       </h1>
 
-      <div style={{ textAlign: "left", margin: ".5em auto" }}>
+      <div className="d-flex pv-16">
         <div>
           <b>Connected users:</b>{" "}
           <span
@@ -48,16 +48,18 @@ const Header = ({
           />
           {userCount}
         </div>
-        <div>
-          <b>Cooldown:</b>{" "}
-          {COOLDOWN_SECONDS === 0 ? (
-            <>
-              <s>0s</s> No cooldown for cool kids
-            </>
-          ) : (
-            <span>{cooldownTime}s</span>
-          )}
-        </div>
+        {COOLDOWN_SECONDS !== 0 && (
+          <div>
+            <b>Cooldown:</b>{" "}
+            {COOLDOWN_SECONDS === 0 ? (
+              <>
+                <s>0s</s> No cooldown for cool kids
+              </>
+            ) : (
+              <span>{cooldownTime}s</span>
+            )}
+          </div>
+        )}
         <div>
           <b>Current cell</b>:
           {currentHit !== null && (

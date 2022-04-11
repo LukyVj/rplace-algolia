@@ -90,21 +90,16 @@ a {
 
 .canvas {
   display: grid;
-  width: calc(var(--canvas-size) / 1.25);
-  height: calc(var(--canvas-size) / 1.25);
   border: 1px solid red;
   grid-template-columns: repeat(60, 1fr);
   margin: auto;
 }
 
+.canvas > div[data-cell-id] {
+  width: 12px;
+  height: 12px;
+}
 .canvas > div[data-cell-id]:hover {
   transform: scale(1.5);
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 15%);
-}
-
-nav .palette {
-  display: grid;
-  width: var(--canvas-size);
-  grid-template-columns: repeat(16, 1fr);
-  margin: auto;
 }

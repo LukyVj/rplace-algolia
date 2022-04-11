@@ -11,16 +11,10 @@ import { InstantSearch, connectSearchBox } from "react-instantsearch-dom";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import Header from "../components/header";
+import { searchClient } from "../scripts/algolia";
 
 const COOLDOWN_SECONDS = 0;
-const searchClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
-  process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!,
-  {
-    responsesCache: createNullCache(),
-    requestsCache: createNullCache(),
-  }
-);
+
 const INDEX_NAME = "algolia_canvas_place_test";
 
 const index = searchClient.initIndex(INDEX_NAME);

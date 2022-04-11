@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { colors } from "../data/colors";
+import Button from "./button/button";
 
 interface PaletteProps {
   setPickedColor: (e: any) => void;
@@ -19,43 +20,39 @@ const Palette = ({
   hasCooldown,
 }: PaletteProps) => {
   return (
-    <nav
+    <div
       style={{
-        display: "flex",
-        alignItems: "center",
-        width: "calc(var(--canvas-size)/1.25)",
-        margin: "1em auto",
-        height: PALETTE_HEIGHT,
         pointerEvents: hasCooldown && cooldown ? "none" : "all",
         opacity: hasCooldown && cooldown ? 0.5 : 1,
       }}
     >
-      <button
-        style={{ height: PALETTE_HEIGHT, marginRight: 10 }}
-        onClick={() => setShowGrid(!showGrid)}
-      >
-        Show grid
-      </button>
-
-      <div className="palette">
+      <div className="d-grid g-2">
         {colors.map((color) => (
-          <button
+          <Button
             key={color}
             onClick={(e) => {
               e.preventDefault();
               setPickedColor(color);
             }}
             data-color={color}
+            square
             style={{
               background: color,
-              height: PALETTE_HEIGHT / 2,
+              height: PALETTE_HEIGHT / 2.5,
               appearance: "none",
-              border: "1px solid rgb(0 0 0 / 20%)",
             }}
           />
         ))}
       </div>
-    </nav>
+      <div className="mt-24">
+        <Button
+          style={{ height: PALETTE_HEIGHT, marginRight: 10 }}
+          onClick={() => setShowGrid(!showGrid)}
+        >
+          Show grid
+        </Button>
+      </div>
+    </div>
   );
 };
 
