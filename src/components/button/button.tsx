@@ -6,19 +6,21 @@ interface ButtonProps {
   onClick?: (e: any) => void;
   className?: string;
   square?: boolean;
+  tag?: any;
 }
 
-const nebula = "";
 const Button: React.FC<ButtonProps> = ({
   children,
   style,
   onClick,
   className,
   square,
+  tag,
 }) => {
   const other = { style, onClick };
+  const ButtonTag: any = tag ? tag : "button";
   return (
-    <button
+    <ButtonTag
       {...other}
       className={cx(
         "app-none bdw-0 bgc-nebula-500 color-white hover:bgc-nebula-600 cursor-pointer ff-mono p-16 d-block",
@@ -28,7 +30,7 @@ const Button: React.FC<ButtonProps> = ({
       )}
     >
       {children}
-    </button>
+    </ButtonTag>
   );
 };
 

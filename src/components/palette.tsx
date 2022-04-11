@@ -8,6 +8,7 @@ interface PaletteProps {
   showGrid: boolean;
   cooldown: boolean;
   hasCooldown: boolean;
+  pickedColor: string;
 }
 
 const PALETTE_HEIGHT = 80;
@@ -18,6 +19,7 @@ const Palette = ({
   showGrid,
   cooldown,
   hasCooldown,
+  pickedColor,
 }: PaletteProps) => {
   return (
     <div
@@ -44,6 +46,12 @@ const Palette = ({
           />
         ))}
       </div>
+      <Button
+        style={{ background: pickedColor }}
+        tag="div"
+        className="mv-16"
+        square
+      />
       <div className="mt-24">
         <Button
           style={{ height: PALETTE_HEIGHT, marginRight: 10 }}

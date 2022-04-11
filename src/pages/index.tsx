@@ -130,7 +130,7 @@ const Home: NextPage = () => {
       />
 
       <div className="d-grid g-2 ggap-16 w-800 m-auto">
-        <nav>
+        <nav className="w-100">
           <Button className="mb-24 w-100p" onClick={() => setIsExplorer(false)}>
             Canvas
           </Button>
@@ -138,13 +138,32 @@ const Home: NextPage = () => {
             Explorer
           </Button>
 
-          <Palette
-            setPickedColor={setPickedColor}
-            setShowGrid={setShowGrid}
-            showGrid={showGrid}
-            cooldown={cooldown}
-            hasCooldown={hasCooldown}
-          />
+          {isExplorer && allSnapshots ? (
+            <>
+              {" "}
+              <input
+                type="range"
+                name="explorer_range"
+                id="explorer_range"
+                className="w-100p"
+                min={0}
+                max={maxSnapshot}
+                onInput={(e) => {
+                  setSelectedSnapshot((e.target as any).value);
+                }}
+              />
+              <time>{allSnapshots[selectedSnapshot].dateAdded}</time>
+            </>
+          ) : (
+            <Palette
+              setPickedColor={setPickedColor}
+              setShowGrid={setShowGrid}
+              showGrid={showGrid}
+              cooldown={cooldown}
+              hasCooldown={hasCooldown}
+              pickedColor={pickedColor}
+            />
+          )}
         </nav>
 
         {isExplorer ? (
@@ -152,16 +171,6 @@ const Home: NextPage = () => {
             {allSnapshots && (
               <Canvas isSnapshot snapshot={allSnapshots[selectedSnapshot]} />
             )}
-            <input
-              type="range"
-              name="explorer_range"
-              id="explorer_range"
-              min={0}
-              max={maxSnapshot}
-              onInput={(e) => {
-                setSelectedSnapshot((e.target as any).value);
-              }}
-            />
           </div>
         ) : (
           <div>

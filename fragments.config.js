@@ -39,6 +39,7 @@ const config = {
   sizes: {
     0: 0,
     "100p": "100%",
+    100: "100px",
     800: "800px",
   },
 };
@@ -422,7 +423,7 @@ module.exports = {
             '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
           serif:
             'Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif',
-          mono: '"SFMono-Regular", Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace',
+          mono: '"Courier New", Courier, monospace',
         },
       },
       fontSize: {

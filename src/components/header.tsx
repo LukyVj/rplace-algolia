@@ -33,9 +33,9 @@ const Header = ({
         </Link>
       </h1>
 
-      <div className="d-flex pv-16">
-        <div>
-          <b>Connected users:</b>{" "}
+      <div className="d-flex">
+        <div className="p-16">
+          [<b>Connected users:</b>{" "}
           <span
             style={{
               display: "inline-block",
@@ -46,11 +46,11 @@ const Header = ({
               marginRight: 5,
             }}
           />
-          {userCount}
+          {userCount}]
         </div>
         {COOLDOWN_SECONDS !== 0 && (
-          <div>
-            <b>Cooldown:</b>{" "}
+          <div className="p-16">
+            [<b>Cooldown:</b>{" "}
             {COOLDOWN_SECONDS === 0 ? (
               <>
                 <s>0s</s> No cooldown for cool kids
@@ -58,10 +58,11 @@ const Header = ({
             ) : (
               <span>{cooldownTime}s</span>
             )}
+            ]
           </div>
         )}
-        <div>
-          <b>Current cell</b>:
+        <div className="p-16">
+          [<b>Current cell</b>:
           {currentHit !== null && (
             <>
               <span> {currentHit.id}</span> -{" "}
@@ -75,6 +76,7 @@ const Header = ({
               {currentHit.bg_color}
             </>
           )}
+          ]
         </div>
       </div>
     </header>

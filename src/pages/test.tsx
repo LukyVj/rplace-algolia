@@ -1,13 +1,9 @@
 import type { NextPage } from "next";
-import algoliasearch from "algoliasearch";
-import { createNullCache } from "@algolia/cache-common";
-
 import Head from "next/head";
-import Image from "next/image";
 import Canvas from "../components/canvas";
 import Palette from "../components/palette";
 import styles from "../styles/Home.module.css";
-import { InstantSearch, connectSearchBox } from "react-instantsearch-dom";
+import { InstantSearch } from "react-instantsearch-dom";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import Header from "../components/header";
@@ -132,6 +128,7 @@ const Test: NextPage = () => {
             showGrid={showGrid}
             cooldown={cooldown}
             hasCooldown={hasCooldown}
+            pickedColor={pickedColor}
           />
         </InstantSearch>
       </div>
