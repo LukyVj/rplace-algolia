@@ -15,7 +15,7 @@ const index = searchClient.initIndex(
 );
 
 export default function indexData(req: NextApiRequest, res: NextApiResponse) {
-  console.log(req.body);
+  res.setHeader("Cache-Control", "s-maxage=86400");
   res.send({ body: JSON.parse(req.body) });
   index.saveObject({
     objectID: JSON.parse(req.body).objectID,
