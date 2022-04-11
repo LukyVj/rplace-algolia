@@ -10,7 +10,7 @@ import { index, snapshotIndex } from "../scripts/algolia";
 import Button from "../components/button/button";
 import { snaptshotType } from "../types/snaptshot";
 
-const COOLDOWN_SECONDS = 0;
+const COOLDOWN_SECONDS = null;
 
 const Home: NextPage = () => {
   const [pickedColor, setPickedColor] = useState("#FFFFFF");
