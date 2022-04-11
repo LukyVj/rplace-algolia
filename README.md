@@ -1,5 +1,7 @@
 # r/place inspired canvas built with Algolia
 
+<img width="1120" alt="Screenshot 2022-04-11 at 18 13 11" src="https://user-images.githubusercontent.com/1630200/162784451-6e3e45e6-38f8-4ec2-8458-f43a28644afe.png">
+
 This experiment is a canvas built entirely with Algolia.
 
 It has some flaws, but it shows the power of Algolia, how fast it is, and how playful it can be.
@@ -7,6 +9,7 @@ It has some flaws, but it shows the power of Algolia, how fast it is, and how pl
 The idea is that every pixel is basically a hit. When you click on a pixel, it will send a `index.saveObect()`, replacing an attribute value with the current color you've picked.
 
 The index contains exactly 4020 hits, and this is what every hit contains:
+
 
 ```json
 {
