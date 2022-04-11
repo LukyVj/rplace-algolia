@@ -14,11 +14,14 @@ const index = searchClient.initIndex(
   process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME!
 );
 
-export default function indexData(req: NextApiRequest, res: NextApiResponse) {
-  res.setHeader("Cache-Control", "s-maxage=86400");
+export default async function indexData(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  res.setHeader("Cache-Control", "s-maxage=0");
 
   res.send({ body: JSON.parse(req.body) });
-  index.saveObject({
+  await index.saveObject({
     objectID: JSON.parse(req.body).objectID,
     bg_color: JSON.parse(req.body).bg_color,
     id: JSON.parse(req.body).id,
