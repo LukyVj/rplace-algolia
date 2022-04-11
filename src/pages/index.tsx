@@ -131,6 +131,7 @@ const Home: NextPage = () => {
             cooldown={cooldown}
             hasCooldown={hasCooldown}
             setCurrentHit={setCurrentHit}
+            useApiRoute
           />
           <Palette
             setPickedColor={setPickedColor}
