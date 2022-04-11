@@ -86,6 +86,7 @@ const Canvas = ({
     });
   };
 
+  console.log(snapshot?.snapshot.length);
   const handleMouseOver = (hit: hitType) => {
     setCurrentHit && setCurrentHit(hit);
   };
@@ -98,25 +99,27 @@ const Canvas = ({
           gridTemplateColumns: "repeat(2,1fr)",
         }}
       >
-        {isSnapshot && snapshot?.snapshot
-          ? snapshot.snapshot.map((color: string, index: number) => {
-              return (
-                <div
-                  data-cell-id={`${color}-${index}`}
-                  key={`${color}-${index}`}
-                  style={{
-                    background: color,
-                  }}
-                />
-              );
-            })
-          : canvas.map((c) => {
-              const start = 1 + c * canvasSize;
-              const end = canvasSize + canvasSize * c;
+        {canvas.map((c) => {
+          const start = 1 + c * canvasSize;
+          const end = canvasSize + canvasSize * c;
 
-              return (
-                <div className="canvas" key={c}>
-                  {allHits.slice(start - 1, end).map((hit: any) => {
+          return (
+            <div className="canvas" key={c}>
+              {isSnapshot && snapshot?.snapshot
+                ? snapshot.snapshot
+                    .slice(start - 1, end)
+                    .map((color: string, index: number) => {
+                      return (
+                        <div
+                          data-cell-id={`${color}-${index}`}
+                          key={`${color}-${index}`}
+                          style={{
+                            background: `#${color}`,
+                          }}
+                        />
+                      );
+                    })
+                : allHits.slice(start - 1, end).map((hit: any) => {
                     return (
                       <div
                         onMouseOver={(e) => handleMouseOver(hit)}
@@ -136,33 +139,12 @@ const Canvas = ({
                       />
                     );
                   })}
-                </div>
-              );
-            })}
+            </div>
+          );
+        })}
       </main>
     </>
   );
 };
-
-/**
- * allHits.map((hit: any) => {
-              return (
-                <div
-                  onMouseOver={(e) => handleMouseOver(hit)}
-                  data-cell-id={hit.id}
-                  key={hit.objectID}
-                  onClick={(e) =>
-                    useApiRoute
-                      ? handleClickThroughApiRoute(e, hit)
-                      : handleClick(e, hit)
-                  }
-                  style={{
-                    background: hit.bg_color,
-                    border: showGrid ? "0.5px solid rgb(0 0 0 / 30%)" : "",
-                  }}
-                />
-              );
-            })
- */
 
 export default Canvas;

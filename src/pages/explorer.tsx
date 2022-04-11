@@ -41,7 +41,7 @@ const Home: NextPage = () => {
     bg_color: string;
   } | null>(null);
   let snapshotsHits: snaptshotType[] = [];
-  const [isExplorer, setIsExplorer] = useState(false);
+  const [isExplorer, setIsExplorer] = useState(true);
   const [allSnapshots, setAllSnapshots] = useState<snaptshotType[] | null>(
     null
   );
@@ -107,7 +107,7 @@ const Home: NextPage = () => {
         setAllSnapshots(snapshotsHits.reverse());
       });
 
-    console.log(allSnapshots);
+    console.log("all", allSnapshots);
   }, []);
 
   return (
