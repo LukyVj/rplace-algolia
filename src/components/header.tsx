@@ -16,6 +16,7 @@ const Header = ({
   cooldownTime,
   COOLDOWN_SECONDS,
 }: HeaderProps) => {
+  console.log(cooldownTime, COOLDOWN_SECONDS);
   return (
     <header
       className="w-800"
@@ -48,10 +49,10 @@ const Header = ({
           />
           {userCount}]
         </div>
-        {COOLDOWN_SECONDS !== 0 && (
+        {COOLDOWN_SECONDS !== null && (
           <div className="p-16">
             [<b>Cooldown:</b>{" "}
-            {COOLDOWN_SECONDS === 0 ? (
+            {COOLDOWN_SECONDS === null ? (
               <>
                 <s>0s</s> No cooldown for cool kids
               </>

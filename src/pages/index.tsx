@@ -10,7 +10,7 @@ import { index, snapshotIndex } from "../scripts/algolia";
 import Button from "../components/button/button";
 import { snaptshotType } from "../types/snaptshot";
 
-const COOLDOWN_SECONDS = null;
+const COOLDOWN_SECONDS = 0;
 
 const Home: NextPage = () => {
   const [pickedColor, setPickedColor] = useState("#FFFFFF");
@@ -49,12 +49,14 @@ const Home: NextPage = () => {
   const [selectedSnapshot, setSelectedSnapshot] = useState<number>(0);
 
   useEffect(() => {
+    console.log({ cooldown, cooldownTime });
     if (cooldown && cooldownTime) {
       let currentTime = cooldownTime - 1;
       const interval = setInterval(() => {
         if (currentTime === -1) {
           setCooldown(false);
           setCooldownTime(COOLDOWN_SECONDS ? COOLDOWN_SECONDS : 0);
+          console.log(currentTime);
         } else {
           setCooldownTime(currentTime--);
         }
@@ -95,20 +97,22 @@ const Home: NextPage = () => {
   }, []);
 
   useEffect(() => {
-    snapshotIndex
-      .browseObjects({
-        query: "",
-        batch: (batch: any) => {
-          snapshotsHits = snapshotsHits.concat(batch);
-        },
-      })
-      .then(() => {
-        setMaxSnapshot(snapshotsHits.length - 1);
-        setAllSnapshots(snapshotsHits.reverse());
-      });
+    if (isExplorer) {
+      snapshotIndex
+        .browseObjects({
+          query: "",
+          batch: (batch: any) => {
+            snapshotsHits = snapshotsHits.concat(batch);
+          },
+        })
+        .then(() => {
+          setMaxSnapshot(snapshotsHits.length - 1);
+          setAllSnapshots(snapshotsHits.reverse());
+        });
 
-    console.log(allSnapshots);
-  }, []);
+      console.log(allSnapshots);
+    }
+  }, [isExplorer]);
 
   return (
     <div>

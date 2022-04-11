@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { hexToRgb } from "../scripts/helpers";
 
 import { hitType } from "../types/hit";
 import { snaptshotType } from "../types/snaptshot";
@@ -63,11 +64,18 @@ const Canvas = ({
   };
 
   const handleClick = (e: any, hit: hitType) => {
-    if (hasCooldown && !cooldown && setCooldown) {
-      indexData(e, hit);
-      setCooldown(true);
-    } else {
-      indexData(e, hit);
+    // if the color of the clicked element is the same as the color of the current hit
+    // Do nothing
+    (e.target as HTMLDivElement).style.background = pickedColor || "";
+    if (
+      (e.target as HTMLDivElement).style.background !== hexToRgb(pickedColor!)
+    ) {
+      if (hasCooldown && !cooldown && setCooldown) {
+        indexData(e, hit);
+        setCooldown(true);
+      } else {
+        indexData(e, hit);
+      }
     }
   };
 
@@ -75,18 +83,28 @@ const Canvas = ({
    * The following code works fine on dev but not on prod.
    */
   const handleClickThroughApiRoute = async (e: any, hit: hitType) => {
-    (e.target as HTMLDivElement).style.background = pickedColor || "";
-    await fetch(`/api/indexData`, {
-      method: "POST",
-      body: JSON.stringify({
-        objectID: hit.objectID,
-        bg_color: pickedColor,
-        id: hit.id,
-      }),
-    });
+    // if the color of the clicked element is the same as the color of the current hit
+    // Do nothing
+    if (
+      (e.target as HTMLDivElement).style.background !== hexToRgb(pickedColor!)
+    ) {
+      (e.target as HTMLDivElement).style.background = pickedColor || "";
+
+      if (hasCooldown && !cooldown && setCooldown) {
+        setCooldown(true);
+      }
+
+      await fetch(`/api/indexData`, {
+        method: "POST",
+        body: JSON.stringify({
+          objectID: hit.objectID,
+          bg_color: pickedColor,
+          id: hit.id,
+        }),
+      });
+    }
   };
 
-  console.log(snapshot?.snapshot.length);
   const handleMouseOver = (hit: hitType) => {
     setCurrentHit && setCurrentHit(hit);
   };
