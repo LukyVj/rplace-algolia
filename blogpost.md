@@ -9,6 +9,8 @@ It got me thinking ( a lot ) and I wondered if I could leverage the power of Alg
 
 The initial idea was to create an index, containing 100 records, and setup a new NextJS project to host my experiment on Vercel.
 
+Each records contains a `bg_color` attribute
+
 I've used Algolia's InstantSearch React to render my Hits on my page. The idea is quite simple, every hit is a div, and the div's background color is the `bg_color` value of the hit.
 
 When you click on that div, it will send a `index.saveObject()` to Algolia, and replace the `bg_color` attribute with the current color you picked.
@@ -22,3 +24,5 @@ Now, I've added a "few" more hits to the index, and I've scaled the canvas up to
 # Making the canvas interactive
 
 # Hiding API keys
+
+# Buildign the explorer
