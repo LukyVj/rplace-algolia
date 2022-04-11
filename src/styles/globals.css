@@ -88,17 +88,17 @@ a {
   box-sizing: border-box;
 }
 
+.canvas-wrapper {
+  border: 1px solid red;
+}
 .canvas {
   display: grid;
-  border: 1px solid red;
   grid-template-columns: repeat(60, 1fr);
-  margin: auto;
+  grid-template-rows: repeat(67, 1fr);
+  width: 400px;
+  height: 400px;
 }
 
-.canvas > div[data-cell-id] {
-  width: 12px;
-  height: 12px;
-}
 .canvas > div[data-cell-id]:hover {
   transform: scale(1.5);
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 15%);

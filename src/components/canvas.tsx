@@ -30,6 +30,9 @@ const Canvas = ({
 }: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
 
+  const canvas = [0, 1, 2, 3];
+  const canvasSize = 4020;
+
   useEffect(() => {
     if (index) {
       const id = setInterval(() => {
@@ -89,7 +92,12 @@ const Canvas = ({
 
   return (
     <>
-      <main className="canvas">
+      <main
+        className="canvas-wrapper d-grid"
+        style={{
+          gridTemplateColumns: "repeat(2,1fr)",
+        }}
+      >
         {isSnapshot && snapshot?.snapshot
           ? snapshot.snapshot.map((color: string, index: number) => {
               return (
@@ -102,7 +110,42 @@ const Canvas = ({
                 />
               );
             })
-          : allHits.map((hit: any) => {
+          : canvas.map((c) => {
+              const start = 1 + c * canvasSize;
+              const end = canvasSize + canvasSize * c;
+
+              return (
+                <div className="canvas" key={c}>
+                  {allHits.slice(start - 1, end).map((hit: any) => {
+                    return (
+                      <div
+                        onMouseOver={(e) => handleMouseOver(hit)}
+                        data-cell-id={hit.id}
+                        key={hit.objectID}
+                        onClick={(e) =>
+                          useApiRoute
+                            ? handleClickThroughApiRoute(e, hit)
+                            : handleClick(e, hit)
+                        }
+                        style={{
+                          background: hit.bg_color,
+                          outline: showGrid
+                            ? "0.5px solid rgb(0 0 0 / 30%)"
+                            : "",
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+              );
+            })}
+      </main>
+    </>
+  );
+};
+
+/**
+ * allHits.map((hit: any) => {
               return (
                 <div
                   onMouseOver={(e) => handleMouseOver(hit)}
@@ -119,10 +162,7 @@ const Canvas = ({
                   }}
                 />
               );
-            })}
-      </main>
-    </>
-  );
-};
+            })
+ */
 
 export default Canvas;

@@ -132,12 +132,23 @@ const Home: NextPage = () => {
 
       <div className="d-grid g-2 ggap-16 w-800 m-auto">
         <nav className="w-100">
-          <Button className="mb-24 w-100p" onClick={() => setIsExplorer(false)}>
-            Canvas
-          </Button>
-          <Button className="mb-24 w-100p" onClick={() => setIsExplorer(true)}>
-            Explorer
-          </Button>
+          {process.env.NEXT_PUBLIC_NODE_ENV === "development" && (
+            <>
+              {" "}
+              <Button
+                className="mb-24 w-100p"
+                onClick={() => setIsExplorer(false)}
+              >
+                Canvas
+              </Button>
+              <Button
+                className="mb-24 w-100p"
+                onClick={() => setIsExplorer(true)}
+              >
+                Explorer
+              </Button>
+            </>
+          )}
 
           {isExplorer && allSnapshots ? (
             <>
