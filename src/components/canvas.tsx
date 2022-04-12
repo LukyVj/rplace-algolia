@@ -114,7 +114,14 @@ const Canvas = ({
   };
 
   const handleMouseOver = (hit: hitType, coordinates: string) => {
-    setCurrentHit && setCurrentHit({ ...hit, coordinates });
+    setCurrentHit &&
+      setCurrentHit({
+        ...hit,
+        coordinates: {
+          x: coordinates.split("x")[0],
+          y: coordinates.split("x")[1],
+        },
+      });
   };
 
   const [isLoading, setIsLoading] = useState<boolean | null>(null);
