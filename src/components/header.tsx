@@ -17,7 +17,6 @@ const Header = ({
   cooldownTime,
   COOLDOWN_SECONDS,
 }: HeaderProps) => {
-  console.log(currentHit);
   return (
     <header
       className="w-800"
@@ -67,10 +66,16 @@ const Header = ({
           [<b>Current cell</b>:
           {currentHit !== null && (
             <>
-              <span> {currentHit.id}</span> -{" "}
+              {"{"}
               <span>
                 {" "}
-                {currentHit.coordinates.x} x {currentHit.coordinates.y}
+                <b>id</b>: {currentHit.id}
+              </span>
+              <span>
+                {","}
+                <b>x</b>: {currentHit.coordinates.x}, <b>y</b>:
+                {currentHit.coordinates.y}
+                {"}"}
               </span>
               <span
                 style={{

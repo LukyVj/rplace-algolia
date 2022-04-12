@@ -33,7 +33,6 @@ const Canvas = ({
   snapshot,
 }: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
-  const [hitsReady, setHitsReady] = useState(false);
 
   const canvas = [0, 1, 2, 3];
   const canvasSize = 4020;
@@ -113,13 +112,13 @@ const Canvas = ({
     }
   };
 
-  const handleMouseOver = (hit: hitType, coordinates: string) => {
+  const handleMouseOver = (hit: hitType, coordx: number, coordy: number) => {
     setCurrentHit &&
       setCurrentHit({
         ...hit,
         coordinates: {
-          x: coordinates.split("x")[0],
-          y: coordinates.split("x")[1],
+          x: coordx,
+          y: coordy,
         },
       });
   };
@@ -184,14 +183,14 @@ const Canvas = ({
                           onMouseOver={(e) => {
                             handleMouseOver(
                               hit,
-                              (e.target as any).dataset.coordinates
+                              (e.target as any).dataset.coordinatesX,
+                              (e.target as any).dataset.coordinatesY
                             );
                           }}
                           data-cell-id={hit.id}
                           key={hit.objectID}
-                          data-coordinates={`${hit.id % 120}x${
-                            Math.floor(hit.id / 120) + 1
-                          }`}
+                          data-coordinates-x={hit.id % 134}
+                          data-coordinates-y={Math.floor(hit.id / 120) + 1}
                           onClick={(e) =>
                             useApiRoute
                               ? handleClickThroughApiRoute(e, hit)
@@ -200,7 +199,7 @@ const Canvas = ({
                           style={{
                             background: hit.bg_color,
                             outline: showGrid
-                              ? "0.5px solid rgb(0 0 0 / 30%)"
+                              ? "1px solid rgb(0 0 0 / 30%)"
                               : "",
                           }}
                         />
