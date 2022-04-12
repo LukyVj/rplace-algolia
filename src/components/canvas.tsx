@@ -36,7 +36,9 @@ const Canvas = ({
 
   const canvas = [0, 1, 2, 3];
   const canvasSize = 4020;
-  const loaderColor = colors[Math.floor(Math.random() * colors.length)];
+  const [loaderColor] = useState(
+    colors[Math.floor(Math.random() * colors.length)]
+  );
 
   useEffect(() => {
     if (index) {
@@ -189,8 +191,10 @@ const Canvas = ({
                           }}
                           data-cell-id={hit.id}
                           key={hit.objectID}
-                          data-coordinates-x={hit.id % 134}
-                          data-coordinates-y={Math.floor(hit.id / 120) + 1}
+                          // data-coordinates-x={((hit.id * 2) % 120) - 1}
+                          // data-coordinates-y={Math.floor(hit.id / 120) + 1}
+                          data-coordinates-x={(hit.id - 60 * c) % 120}
+                          data-coordinates-y={Math.ceil(hit.id / 120)}
                           onClick={(e) =>
                             useApiRoute
                               ? handleClickThroughApiRoute(e, hit)

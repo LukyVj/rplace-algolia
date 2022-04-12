@@ -56,7 +56,6 @@ const Home: NextPage = () => {
         if (currentTime === -1) {
           setCooldown(false);
           setCooldownTime(COOLDOWN_SECONDS ? COOLDOWN_SECONDS : 0);
-          console.log(currentTime);
         } else {
           setCooldownTime(currentTime--);
         }
@@ -103,8 +102,6 @@ const Home: NextPage = () => {
           setMaxSnapshot(snapshotsHits.length - 1);
           setAllSnapshots(snapshotsHits.reverse());
         });
-
-      console.log(allSnapshots);
     }
   }, [isExplorer]);
 

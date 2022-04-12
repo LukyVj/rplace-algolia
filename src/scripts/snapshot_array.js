@@ -53,7 +53,6 @@ index
           query: "",
           filters: "newest:true",
           batch: (batch) => {
-            console.log(batch[0]);
             latestHit = batch[0];
           },
         })

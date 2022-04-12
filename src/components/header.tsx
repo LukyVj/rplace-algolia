@@ -74,17 +74,18 @@ const Header = ({
               <span>
                 {","}
                 <b>x</b>: {currentHit.coordinates.x}, <b>y</b>:
-                {currentHit.coordinates.y}
-                {"}"}
-              </span>
+                {currentHit.coordinates.y},
+              </span>{" "}
+              <b>color</b>:
               <span
                 style={{
                   background: currentHit.bg_color,
                   display: "inline-block",
                   padding: 5,
+                  outline: "1px solid rgb(0 0 0/20%)",
                 }}
-              ></span>
-              {currentHit.bg_color}
+              />
+              {"}"}
             </>
           )}
           ]
