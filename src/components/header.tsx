@@ -5,6 +5,7 @@ interface HeaderProps {
   currentHit: {
     id: number;
     bg_color: string;
+    coordinates: string;
   } | null;
   COOLDOWN_SECONDS?: number;
   cooldownTime?: number;
@@ -16,6 +17,7 @@ const Header = ({
   cooldownTime,
   COOLDOWN_SECONDS,
 }: HeaderProps) => {
+  console.log(currentHit);
   return (
     <header
       className="w-800"
@@ -66,6 +68,7 @@ const Header = ({
           {currentHit !== null && (
             <>
               <span> {currentHit.id}</span> -{" "}
+              <span> {currentHit.coordinates}</span>
               <span
                 style={{
                   background: currentHit.bg_color,

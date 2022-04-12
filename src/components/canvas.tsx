@@ -113,8 +113,8 @@ const Canvas = ({
     }
   };
 
-  const handleMouseOver = (hit: hitType) => {
-    setCurrentHit && setCurrentHit(hit);
+  const handleMouseOver = (hit: hitType, coordinates: string) => {
+    setCurrentHit && setCurrentHit({ ...hit, coordinates });
   };
 
   const [isLoading, setIsLoading] = useState<boolean | null>(null);
@@ -173,9 +173,17 @@ const Canvas = ({
                   : allHits.slice(start - 1, end).map((hit: any) => {
                       return (
                         <div
-                          onMouseOver={(e) => handleMouseOver(hit)}
+                          onMouseOver={(e) => {
+                            handleMouseOver(
+                              hit,
+                              (e.target as any).dataset.coordinates
+                            );
+                          }}
                           data-cell-id={hit.id}
                           key={hit.objectID}
+                          data-coordinates={`${hit.id % 120}x${
+                            Math.floor(hit.id / 120) + 1
+                          }`}
                           onClick={(e) =>
                             useApiRoute
                               ? handleClickThroughApiRoute(e, hit)
