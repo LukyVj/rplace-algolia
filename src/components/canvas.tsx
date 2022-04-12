@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import cx from "classnames";
 import { hexToRgb } from "../scripts/helpers";
 
 import { hitType } from "../types/hit";
 import { snaptshotType } from "../types/snaptshot";
+
+import { colors } from "../data/colors";
 
 interface CanvasProps {
   pickedColor?: string;
@@ -34,6 +37,7 @@ const Canvas = ({
 
   const canvas = [0, 1, 2, 3];
   const canvasSize = 4020;
+  const loaderColor = colors[Math.floor(Math.random() * colors.length)];
 
   useEffect(() => {
     if (index) {
@@ -122,13 +126,29 @@ const Canvas = ({
   return (
     <>
       <main
-        className="canvas-wrapper d-grid"
+        className={cx(
+          isLoading ? "d-flex jc-center ai-center" : "d-grid",
+          "canvas-wrapper"
+        )}
         style={{
-          gridTemplateColumns: "repeat(2,1fr)",
+          gridTemplateColumns: !isLoading ? "repeat(2,1fr)" : "",
+          width: isLoading ? 800 : "",
+          height: isLoading ? "100%" : "",
+          textAlign: "center",
         }}
       >
         {isLoading ? (
-          <>LOADING</>
+          <>
+            <h2
+              className="d-flex ai-center jc-center w-300"
+              style={{
+                color: loaderColor === "#FFFFFF" ? "#000000" : loaderColor,
+              }}
+            >
+              <div className="mr-32">LOADING</div>{" "}
+              <div className="dot-bricks" />
+            </h2>
+          </>
         ) : (
           canvas.map((c) => {
             const start = 1 + c * canvasSize;
