@@ -48,6 +48,7 @@ const Home: NextPage = () => {
   );
   const [maxSnapshot, setMaxSnapshot] = useState<number>(0);
   const [selectedSnapshot, setSelectedSnapshot] = useState<number>(0);
+  const [hasDisclaimer, setHasDisclaimer] = useState(true);
 
   useEffect(() => {
     if (cooldown && cooldownTime) {
@@ -126,6 +127,52 @@ const Home: NextPage = () => {
         COOLDOWN_SECONDS={COOLDOWN_SECONDS !== null ? COOLDOWN_SECONDS : 0}
         cooldownTime={COOLDOWN_SECONDS ? COOLDOWN_SECONDS : undefined}
       />
+
+      {hasDisclaimer && (
+        <>
+          <div
+            style={{
+              background: "rgb(0 0 0 / 80%)",
+              zIndex: 1,
+              width: "100vw",
+              height: "100vh",
+              position: "fixed",
+              top: 0,
+              left: 0,
+            }}
+          />
+          <div
+            style={{
+              background: "var(--nebula-500)",
+              color: "white",
+              fontWeight: "bold",
+              padding: "1em",
+              width: 500,
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              boxShadow: "0 0 50px rgba(0,0,0,1)",
+              zIndex: 2,
+            }}
+          >
+            <h2>DISCLAIMER</h2>
+            <p>Keep this link private within the company ( for now ).</p>
+            <p>Thank you :)</p>
+
+            <div className="ta-center">
+              <a
+                href="#"
+                onClick={() => setHasDisclaimer(false)}
+                style={{ color: "white" }}
+                className="mt-16 d-inline-block td-underline"
+              >
+                -&gt; Close this disclaimer &lt;-
+              </a>
+            </div>
+          </div>
+        </>
+      )}
 
       <div className="d-grid g-2 ggap-16 w-800 m-auto">
         <nav className="w-100">
