@@ -16,7 +16,6 @@ const Header = ({
   cooldownTime,
   COOLDOWN_SECONDS,
 }: HeaderProps) => {
-  console.log(cooldownTime, COOLDOWN_SECONDS);
   return (
     <header
       className="w-800"

@@ -15,6 +15,7 @@ interface CanvasProps {
   useApiRoute?: boolean;
   isSnapshot?: boolean;
   snapshot?: snaptshotType;
+  setIsLoading?: (e: any) => void;
 }
 
 const Canvas = ({
@@ -28,8 +29,10 @@ const Canvas = ({
   useApiRoute,
   isSnapshot,
   snapshot,
+  setIsLoading,
 }: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
+  const [hitsReady, setHitsReady] = useState(false);
 
   const canvas = [0, 1, 2, 3];
   const canvasSize = 4020;
@@ -50,9 +53,12 @@ const Canvas = ({
           });
       }, 600);
 
-      return () => clearInterval(id);
+      return () => {
+        clearInterval(id);
+        setIsLoading && setIsLoading(false);
+      };
     }
-  }, []);
+  }, [allHits]);
 
   const indexData = (e: any, hit: hitType) => {
     (e.target as HTMLDivElement).style.background = pickedColor || "";

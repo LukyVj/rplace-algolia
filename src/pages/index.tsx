@@ -47,9 +47,9 @@ const Home: NextPage = () => {
   );
   const [maxSnapshot, setMaxSnapshot] = useState<number>(0);
   const [selectedSnapshot, setSelectedSnapshot] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean | null>(null);
 
   useEffect(() => {
-    console.log({ cooldown, cooldownTime });
     if (cooldown && cooldownTime) {
       let currentTime = cooldownTime - 1;
       const interval = setInterval(() => {
@@ -81,18 +81,12 @@ const Home: NextPage = () => {
     );
     let currentCount = userCount;
 
-    socket.on("connect", () => {
-      console.log("connect");
-    });
-
     socket.on("clients", (e) => {
-      console.log("clients", e);
       setUserCount(e);
     });
 
     socket.on("disconnect", () => {
       setUserCount(currentCount--);
-      console.log("disconnect");
     });
   }, []);
 
@@ -113,6 +107,10 @@ const Home: NextPage = () => {
       console.log(allSnapshots);
     }
   }, [isExplorer]);
+
+  useEffect(() => {
+    setIsLoading(true);
+  }, []);
 
   return (
     <div>
@@ -187,25 +185,36 @@ const Home: NextPage = () => {
           )}
         </nav>
 
-        {isExplorer ? (
-          <div className="d-flex fxd-column">
-            {allSnapshots && (
-              <Canvas isSnapshot snapshot={allSnapshots[selectedSnapshot]} />
-            )}
-          </div>
+        {isLoading ? (
+          <>LOADING</>
         ) : (
-          <div>
-            <Canvas
-              pickedColor={pickedColor}
-              index={index}
-              showGrid={showGrid}
-              setCooldown={setCooldown}
-              cooldown={cooldown}
-              hasCooldown={hasCooldown}
-              setCurrentHit={setCurrentHit}
-              useApiRoute
-            />
-          </div>
+          <>
+            {isExplorer ? (
+              <div className="d-flex fxd-column">
+                {allSnapshots && (
+                  <Canvas
+                    isSnapshot
+                    snapshot={allSnapshots[selectedSnapshot]}
+                    setIsLoading={setIsLoading}
+                  />
+                )}
+              </div>
+            ) : (
+              <div>
+                <Canvas
+                  pickedColor={pickedColor}
+                  index={index}
+                  showGrid={showGrid}
+                  setCooldown={setCooldown}
+                  cooldown={cooldown}
+                  hasCooldown={hasCooldown}
+                  setCurrentHit={setCurrentHit}
+                  useApiRoute
+                  setIsLoading={setIsLoading}
+                />
+              </div>
+            )}
+          </>
         )}
       </div>
       <footer
