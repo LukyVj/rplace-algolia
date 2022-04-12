@@ -146,7 +146,7 @@ const Home: NextPage = () => {
               background: "var(--nebula-500)",
               color: "white",
               fontWeight: "bold",
-              padding: "1em",
+              padding: "2.15em",
               width: 500,
               position: "fixed",
               top: "50%",
@@ -156,19 +156,22 @@ const Home: NextPage = () => {
               zIndex: 2,
             }}
           >
-            <h2>DISCLAIMER</h2>
+            <h2 className="mt-0">DISCLAIMER</h2>
             <p>Keep this link private within the company ( for now ).</p>
             <p>Thank you :)</p>
 
             <div className="ta-center">
-              <a
-                href="#"
+              <Button
                 onClick={() => setHasDisclaimer(false)}
-                style={{ color: "white" }}
+                style={{
+                  color: "white",
+                  backgroundColor: "#ff4500 !important",
+                  fontWeight: "bold",
+                }}
                 className="mt-16 d-inline-block td-underline"
               >
-                -&gt; Close this disclaimer &lt;-
-              </a>
+                Close this disclaimer
+              </Button>
             </div>
           </div>
         </>
