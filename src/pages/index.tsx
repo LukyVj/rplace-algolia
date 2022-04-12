@@ -39,7 +39,7 @@ const Home: NextPage = () => {
   const [currentHit, setCurrentHit] = useState<{
     id: number;
     bg_color: string;
-    coordinates: string;
+    coordinates: { x: string; y: string };
   } | null>(null);
   let snapshotsHits: snaptshotType[] = [];
   const [isExplorer, setIsExplorer] = useState(false);
