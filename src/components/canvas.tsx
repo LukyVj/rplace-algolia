@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import cx from "classnames";
-import { hexToRgb } from "../scripts/helpers";
+import { getCoords, hexToRgb } from "../scripts/helpers";
 
 import { hitType } from "../types/hit";
 import { snaptshotType } from "../types/snaptshot";
@@ -114,13 +114,53 @@ const Canvas = ({
     }
   };
 
-  const handleMouseOver = (hit: hitType, coordx: number, coordy: number) => {
+  const shiftX = (c: number, x: number) => {
+    let offsetX;
+    switch (c) {
+      case 1:
+        offsetX = 60;
+        break;
+      case 2:
+        offsetX = 0;
+        break;
+      case 3:
+        offsetX = 60;
+        break;
+      default:
+        offsetX = 0;
+    }
+    console.log({ c, offsetX });
+    return x + offsetX;
+  };
+
+  const shiftY = (c: number, y: number) => {
+    console.log(y);
+    let offsetY;
+    switch (c) {
+      case 1:
+        offsetY = 0;
+        break;
+      case 2:
+        offsetY = -67;
+        break;
+      case 3:
+        offsetY = -134;
+        break;
+      default:
+        offsetY = 0;
+    }
+    console.log({ c, offsetY });
+
+    return y + offsetY;
+  };
+
+  const handleMouseOver = (hit: hitType) => {
     setCurrentHit &&
       setCurrentHit({
         ...hit,
         coordinates: {
-          x: coordx,
-          y: coordy,
+          x: 0,
+          y: 0,
         },
       });
   };
@@ -144,6 +184,9 @@ const Canvas = ({
           width: isLoading ? 800 : "",
           height: isLoading ? "100%" : "",
           textAlign: "center",
+        }}
+        onMouseOver={(e) => {
+          getCoords(e);
         }}
       >
         {isLoading ? (
@@ -183,18 +226,10 @@ const Canvas = ({
                       return (
                         <div
                           onMouseOver={(e) => {
-                            handleMouseOver(
-                              hit,
-                              (e.target as any).dataset.coordinatesX,
-                              (e.target as any).dataset.coordinatesY
-                            );
+                            handleMouseOver(hit);
                           }}
                           data-cell-id={hit.id}
                           key={hit.objectID}
-                          // data-coordinates-x={((hit.id * 2) % 120) - 1}
-                          // data-coordinates-y={Math.floor(hit.id / 120) + 1}
-                          data-coordinates-x={(hit.id - 60 * c) % 120}
-                          data-coordinates-y={Math.ceil(hit.id / 120)}
                           onClick={(e) =>
                             useApiRoute
                               ? handleClickThroughApiRoute(e, hit)

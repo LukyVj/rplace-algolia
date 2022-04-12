@@ -69,13 +69,13 @@ const Header = ({
               {"{"}
               <span>
                 {" "}
-                <b>id</b>: {currentHit.id}
+                <b>id</b>: {currentHit.id},
               </span>
-              <span>
+              {/* <span>
                 {","}
                 <b>x</b>: {currentHit.coordinates.x}, <b>y</b>:
                 {currentHit.coordinates.y},
-              </span>{" "}
+              </span>{" "} */}
               <b>color</b>:
               <span
                 style={{
