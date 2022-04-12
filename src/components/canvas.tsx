@@ -121,6 +121,7 @@ const Canvas = ({
 
   useEffect(() => {
     setIsLoading(true);
+    isSnapshot && setIsLoading(false);
   }, []);
 
   return (
