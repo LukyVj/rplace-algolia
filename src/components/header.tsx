@@ -48,10 +48,10 @@ const Header = ({
           />
           {userCount}]
         </div>
-        {COOLDOWN_SECONDS !== null && (
+        {COOLDOWN_SECONDS !== 0 && (
           <div className="p-16">
             [<b>Cooldown:</b>{" "}
-            {COOLDOWN_SECONDS === null ? (
+            {COOLDOWN_SECONDS === 0 ? (
               <>
                 <s>0s</s> No cooldown for cool kids
               </>

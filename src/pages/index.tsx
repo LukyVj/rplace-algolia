@@ -47,7 +47,6 @@ const Home: NextPage = () => {
   );
   const [maxSnapshot, setMaxSnapshot] = useState<number>(0);
   const [selectedSnapshot, setSelectedSnapshot] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean | null>(null);
 
   useEffect(() => {
     if (cooldown && cooldownTime) {
@@ -107,10 +106,6 @@ const Home: NextPage = () => {
       console.log(allSnapshots);
     }
   }, [isExplorer]);
-
-  useEffect(() => {
-    setIsLoading(true);
-  }, []);
 
   return (
     <div>
@@ -184,37 +179,25 @@ const Home: NextPage = () => {
             />
           )}
         </nav>
-
-        {isLoading ? (
-          <>LOADING</>
-        ) : (
-          <>
-            {isExplorer ? (
-              <div className="d-flex fxd-column">
-                {allSnapshots && (
-                  <Canvas
-                    isSnapshot
-                    snapshot={allSnapshots[selectedSnapshot]}
-                    setIsLoading={setIsLoading}
-                  />
-                )}
-              </div>
-            ) : (
-              <div>
-                <Canvas
-                  pickedColor={pickedColor}
-                  index={index}
-                  showGrid={showGrid}
-                  setCooldown={setCooldown}
-                  cooldown={cooldown}
-                  hasCooldown={hasCooldown}
-                  setCurrentHit={setCurrentHit}
-                  useApiRoute
-                  setIsLoading={setIsLoading}
-                />
-              </div>
+        {isExplorer ? (
+          <div className="d-flex fxd-column">
+            {allSnapshots && (
+              <Canvas isSnapshot snapshot={allSnapshots[selectedSnapshot]} />
             )}
-          </>
+          </div>
+        ) : (
+          <div>
+            <Canvas
+              pickedColor={pickedColor}
+              index={index}
+              showGrid={showGrid}
+              setCooldown={setCooldown}
+              cooldown={cooldown}
+              hasCooldown={hasCooldown}
+              setCurrentHit={setCurrentHit}
+              useApiRoute
+            />
+          </div>
         )}
       </div>
       <footer

@@ -15,7 +15,6 @@ interface CanvasProps {
   useApiRoute?: boolean;
   isSnapshot?: boolean;
   snapshot?: snaptshotType;
-  setIsLoading?: (e: any) => void;
 }
 
 const Canvas = ({
@@ -29,7 +28,6 @@ const Canvas = ({
   useApiRoute,
   isSnapshot,
   snapshot,
-  setIsLoading,
 }: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
   const [hitsReady, setHitsReady] = useState(false);
@@ -115,6 +113,12 @@ const Canvas = ({
     setCurrentHit && setCurrentHit(hit);
   };
 
+  const [isLoading, setIsLoading] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setIsLoading(true);
+  }, []);
+
   return (
     <>
       <main
@@ -123,49 +127,53 @@ const Canvas = ({
           gridTemplateColumns: "repeat(2,1fr)",
         }}
       >
-        {canvas.map((c) => {
-          const start = 1 + c * canvasSize;
-          const end = canvasSize + canvasSize * c;
+        {isLoading ? (
+          <>LOADING</>
+        ) : (
+          canvas.map((c) => {
+            const start = 1 + c * canvasSize;
+            const end = canvasSize + canvasSize * c;
 
-          return (
-            <div className="canvas" key={c}>
-              {isSnapshot && snapshot?.snapshot
-                ? snapshot.snapshot
-                    .slice(start - 1, end)
-                    .map((color: string, index: number) => {
+            return (
+              <div className="canvas" key={c}>
+                {isSnapshot && snapshot?.snapshot
+                  ? snapshot.snapshot
+                      .slice(start - 1, end)
+                      .map((color: string, index: number) => {
+                        return (
+                          <div
+                            data-cell-id={`${color}-${index}`}
+                            key={`${color}-${index}`}
+                            style={{
+                              background: `#${color}`,
+                            }}
+                          />
+                        );
+                      })
+                  : allHits.slice(start - 1, end).map((hit: any) => {
                       return (
                         <div
-                          data-cell-id={`${color}-${index}`}
-                          key={`${color}-${index}`}
+                          onMouseOver={(e) => handleMouseOver(hit)}
+                          data-cell-id={hit.id}
+                          key={hit.objectID}
+                          onClick={(e) =>
+                            useApiRoute
+                              ? handleClickThroughApiRoute(e, hit)
+                              : handleClick(e, hit)
+                          }
                           style={{
-                            background: `#${color}`,
+                            background: hit.bg_color,
+                            outline: showGrid
+                              ? "0.5px solid rgb(0 0 0 / 30%)"
+                              : "",
                           }}
                         />
                       );
-                    })
-                : allHits.slice(start - 1, end).map((hit: any) => {
-                    return (
-                      <div
-                        onMouseOver={(e) => handleMouseOver(hit)}
-                        data-cell-id={hit.id}
-                        key={hit.objectID}
-                        onClick={(e) =>
-                          useApiRoute
-                            ? handleClickThroughApiRoute(e, hit)
-                            : handleClick(e, hit)
-                        }
-                        style={{
-                          background: hit.bg_color,
-                          outline: showGrid
-                            ? "0.5px solid rgb(0 0 0 / 30%)"
-                            : "",
-                        }}
-                      />
-                    );
-                  })}
-            </div>
-          );
-        })}
+                    })}
+              </div>
+            );
+          })
+        )}
       </main>
     </>
   );
