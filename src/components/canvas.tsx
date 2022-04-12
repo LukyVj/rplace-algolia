@@ -114,46 +114,6 @@ const Canvas = ({
     }
   };
 
-  const shiftX = (c: number, x: number) => {
-    let offsetX;
-    switch (c) {
-      case 1:
-        offsetX = 60;
-        break;
-      case 2:
-        offsetX = 0;
-        break;
-      case 3:
-        offsetX = 60;
-        break;
-      default:
-        offsetX = 0;
-    }
-    console.log({ c, offsetX });
-    return x + offsetX;
-  };
-
-  const shiftY = (c: number, y: number) => {
-    console.log(y);
-    let offsetY;
-    switch (c) {
-      case 1:
-        offsetY = 0;
-        break;
-      case 2:
-        offsetY = -67;
-        break;
-      case 3:
-        offsetY = -134;
-        break;
-      default:
-        offsetY = 0;
-    }
-    console.log({ c, offsetY });
-
-    return y + offsetY;
-  };
-
   const handleMouseOver = (hit: hitType) => {
     setCurrentHit &&
       setCurrentHit({
