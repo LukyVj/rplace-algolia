@@ -205,8 +205,10 @@ const Home: NextPage = () => {
         Fully powered by <a href="https://algolia.com">Algolia</a>
         <br />
         Check the code on{" "}
-        <a href="https://github.com/LukyVj/rplace-algolia">GitHub</a> - Read
-        about it{" "}
+        <s>
+          <a href="https://github.com/LukyVj/rplace-algolia">GitHub</a>
+        </s>{" "}
+        - Read about it{" "}
         <a href="#">
           <s>here</s>
         </a>
