@@ -130,10 +130,6 @@ const Canvas = ({
   useEffect(() => {
     setIsLoading(true);
     isSnapshot && setIsLoading(false);
-    window.dessaigne = 0;
-    if ((window.dessaigne = 1)) {
-      console.log("dessaigne");
-    }
   }, []);
 
   const showDessaigne = () => {};
