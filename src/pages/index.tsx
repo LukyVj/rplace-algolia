@@ -102,6 +102,7 @@ const Home: NextPage = () => {
         .then(() => {
           setMaxSnapshot(snapshotsHits.length - 1);
           setAllSnapshots(snapshotsHits.reverse());
+          console.log(allSnapshots);
         });
     }
   }, [isExplorer]);

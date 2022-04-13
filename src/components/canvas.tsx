@@ -36,7 +36,7 @@ const Canvas = ({
 }: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
 
-  const canvas = huge ? [0, 1, 2, 3, 4, 5, 6, 7, 8] : [0, 1, 2, 3];
+  const canvas = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   const canvasSize = 4020;
   const [loaderColor] = useState(
     colors[Math.floor(Math.random() * colors.length)]
@@ -152,11 +152,7 @@ const Canvas = ({
           "canvas-wrapper"
         )}
         style={{
-          gridTemplateColumns: !isLoading
-            ? huge
-              ? "repeat(3,1fr)"
-              : "repeat(2,1fr)"
-            : "",
+          gridTemplateColumns: !isLoading ? "repeat(3,1fr)" : "",
           width: isLoading ? 800 : "",
           height: isLoading ? "100%" : "",
           textAlign: "center",
