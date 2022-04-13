@@ -130,13 +130,19 @@ const Canvas = ({
   useEffect(() => {
     setIsLoading(true);
     isSnapshot && setIsLoading(false);
+    window.dessaigne = 0;
+    if ((window.dessaigne = 1)) {
+      console.log("dessaigne");
+    }
   }, []);
+
+  const showDessaigne = () => {};
 
   return (
     <>
       <main
         className={cx(
-          isLoading ? "d-flex jc-center ai-center" : "d-grid",
+          isLoading ? "d-flex jc-center ai-center" : "d-grid pos-relative",
           "canvas-wrapper"
         )}
         style={{
@@ -149,6 +155,26 @@ const Canvas = ({
           getCoords(e);
         }}
       >
+        <div
+          style={{
+            display: "none",
+            width: 200,
+            height: 400,
+            top: 120,
+            right: -5,
+            opacity: 0.5,
+            pointerEvents: "none",
+            userSelect: "none",
+            overflow: "hidden",
+          }}
+          className="pos-absolute w-200"
+        >
+          <img
+            src="/dessaigne.png"
+            className="w-100p"
+            style={{ transform: "scale(2)" }}
+          ></img>
+        </div>
         {isLoading ? (
           <>
             <h2
