@@ -18,6 +18,7 @@ interface CanvasProps {
   useApiRoute?: boolean;
   isSnapshot?: boolean;
   snapshot?: snaptshotType;
+  huge?: boolean;
 }
 
 const Canvas = ({
@@ -31,10 +32,11 @@ const Canvas = ({
   useApiRoute,
   isSnapshot,
   snapshot,
+  huge,
 }: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
 
-  const canvas = [0, 1, 2, 3];
+  const canvas = huge ? [0, 1, 2, 3, 4, 5, 6, 7, 8] : [0, 1, 2, 3];
   const canvasSize = 4020;
   const [loaderColor] = useState(
     colors[Math.floor(Math.random() * colors.length)]
@@ -103,14 +105,23 @@ const Canvas = ({
         setCooldown(true);
       }
 
-      await fetch(`/api/indexData`, {
-        method: "POST",
-        body: JSON.stringify({
-          objectID: hit.objectID,
-          bg_color: pickedColor,
-          id: hit.id,
-        }),
-      });
+      huge
+        ? await fetch(`/api/indexDataHuge`, {
+            method: "POST",
+            body: JSON.stringify({
+              objectID: hit.objectID,
+              bg_color: pickedColor,
+              id: hit.id,
+            }),
+          })
+        : await fetch(`/api/indexData`, {
+            method: "POST",
+            body: JSON.stringify({
+              objectID: hit.objectID,
+              bg_color: pickedColor,
+              id: hit.id,
+            }),
+          });
     }
   };
 
@@ -132,8 +143,6 @@ const Canvas = ({
     isSnapshot && setIsLoading(false);
   }, []);
 
-  const showDessaigne = () => {};
-
   return (
     <>
       <main
@@ -143,7 +152,11 @@ const Canvas = ({
           "canvas-wrapper"
         )}
         style={{
-          gridTemplateColumns: !isLoading ? "repeat(2,1fr)" : "",
+          gridTemplateColumns: !isLoading
+            ? huge
+              ? "repeat(3,1fr)"
+              : "repeat(2,1fr)"
+            : "",
           width: isLoading ? 800 : "",
           height: isLoading ? "100%" : "",
           textAlign: "center",
@@ -152,26 +165,6 @@ const Canvas = ({
           getCoords(e);
         }}
       >
-        {/* <div
-          style={{
-            display: "none",
-            width: 200,
-            height: 400,
-            top: 120,
-            right: -5,
-            opacity: 0.5,
-            pointerEvents: "none",
-            userSelect: "none",
-            overflow: "hidden",
-          }}
-          className="pos-absolute w-200"
-        >
-          <img
-            src="/dessaigne.png"
-            className="w-100p"
-            style={{ transform: "scale(2)" }}
-          ></img>
-        </div> */}
         {isLoading ? (
           <>
             <h2

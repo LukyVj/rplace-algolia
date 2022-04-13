@@ -13,6 +13,9 @@ export const searchClient = algoliasearch(
 export const index = searchClient.initIndex(
   process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME!
 );
+export const hugeIndex = searchClient.initIndex(
+  process.env.NEXT_PUBLIC_ALGOLIA_HUGE_INDEX_NAME!
+);
 export const snapshotIndex = searchClient.initIndex(
   process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME_SNAPSHOT!
 );

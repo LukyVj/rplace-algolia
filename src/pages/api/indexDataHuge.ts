@@ -10,8 +10,9 @@ const searchClient = algoliasearch(
     requestsCache: createNullCache(),
   }
 );
+
 const index = searchClient.initIndex(
-  process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME!
+  process.env.NEXT_PUBLIC_ALGOLIA_HUGE_INDEX_NAME!
 );
 
 export default async function indexData(
