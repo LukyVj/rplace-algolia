@@ -6,7 +6,7 @@ import Palette from "../components/palette";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import Header from "../components/header";
-import { index, snapshotIndex } from "../scripts/algolia";
+import { hugeIndex, snapshotIndex } from "../scripts/algolia";
 import Button from "../components/button/button";
 import { snaptshotType } from "../types/snaptshot";
 
@@ -177,7 +177,7 @@ const Home: NextPage = () => {
         </>
       )}
 
-      <div className="d-grid g-2 ggap-16 w-800 m-auto">
+      <div className="d-grid g-2 ggap-16 m-auto" style={{ width: "1380px" }}>
         <nav className="w-100">
           {process.env.NEXT_PUBLIC_NODE_ENV === "development" && (
             <>
@@ -237,13 +237,14 @@ const Home: NextPage = () => {
           <div>
             <Canvas
               pickedColor={pickedColor}
-              index={index}
+              index={hugeIndex}
               showGrid={showGrid}
               setCooldown={setCooldown}
               cooldown={cooldown}
               hasCooldown={hasCooldown}
               setCurrentHit={setCurrentHit}
               useApiRoute
+              huge
             />
           </div>
         )}

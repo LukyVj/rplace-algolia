@@ -8,7 +8,7 @@ const searchClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_API_KEY
 );
 const index = searchClient.initIndex(
-  process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME
+  process.env.NEXT_PUBLIC_ALGOLIA_HUGE_INDEX_NAME
 );
 
 let hits = [];
