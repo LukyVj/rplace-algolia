@@ -183,7 +183,11 @@ const Canvas = ({
             const end = canvasSize + canvasSize * c;
 
             return (
-              <div className="canvas" key={c}>
+              <div
+                className="canvas"
+                key={c}
+                style={{ order: c === 2 ? 3 : c === 3 ? 4 : c === 4 ? 2 : c }}
+              >
                 {isSnapshot && snapshot?.snapshot
                   ? snapshot.snapshot
                       .slice(start - 1, end)
