@@ -2,6 +2,8 @@ import { useState } from "react";
 import { colors } from "../data/colors";
 import Button from "./button/button";
 
+import takeshot from "../scripts/screenshot";
+
 interface PaletteProps {
   setPickedColor: (e: any) => void;
   setShowGrid: (e: any) => void;
@@ -58,6 +60,18 @@ const Palette = ({
           onClick={() => setShowGrid(!showGrid)}
         >
           Show grid
+        </Button>
+        <Button
+          className="w-100p mt-24"
+          onClick={(e) => {
+            takeshot();
+            e.target.innerText = "processing";
+            setTimeout(() => {
+              e.target.innerText = "Download image";
+            }, 3000);
+          }}
+        >
+          Download image
         </Button>
       </div>
     </div>

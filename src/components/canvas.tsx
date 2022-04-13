@@ -137,6 +137,7 @@ const Canvas = ({
   return (
     <>
       <main
+        id="canvas-wrapper"
         className={cx(
           isLoading ? "d-flex jc-center ai-center" : "d-grid pos-relative",
           "canvas-wrapper"
@@ -151,7 +152,7 @@ const Canvas = ({
           getCoords(e);
         }}
       >
-        <div
+        {/* <div
           style={{
             display: "none",
             width: 200,
@@ -170,7 +171,7 @@ const Canvas = ({
             className="w-100p"
             style={{ transform: "scale(2)" }}
           ></img>
-        </div>
+        </div> */}
         {isLoading ? (
           <>
             <h2
