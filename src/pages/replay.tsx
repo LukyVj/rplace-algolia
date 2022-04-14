@@ -115,7 +115,11 @@ const Replay: NextPage = () => {
   useEffect(() => {
     if (replay) {
       const replay = setInterval(() => {
-        setSelectedSnapshot(selectedSnapshot + 1);
+        if (selectedSnapshot + 1 === maxSnapshot) {
+          setSelectedSnapshot(0);
+        } else {
+          setSelectedSnapshot(selectedSnapshot + 1);
+        }
         setReplay(false);
       }, 500);
 
