@@ -132,8 +132,8 @@ const Canvas = ({
             display: "none",
             width: 200,
             height: 400,
-            top: 120,
-            right: -5,
+            top: 746,
+            right: 371,
             opacity: 0.5,
             pointerEvents: "none",
             userSelect: "none",
@@ -144,7 +144,6 @@ const Canvas = ({
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg"
             className="w-100p"
-            style={{ transform: "scale(2)" }}
           ></img>
         </div>
         {isLoading ? (
