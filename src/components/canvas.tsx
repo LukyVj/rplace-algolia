@@ -74,22 +74,6 @@ const Canvas = ({
     });
   };
 
-  const handleClick = (e: any, hit: hitType) => {
-    // if the color of the clicked element is the same as the color of the current hit
-    // Do nothing
-    (e.target as HTMLDivElement).style.background = pickedColor || "";
-    if (
-      (e.target as HTMLDivElement).style.background !== hexToRgb(pickedColor!)
-    ) {
-      if (hasCooldown && !cooldown && setCooldown) {
-        indexData(e, hit);
-        setCooldown(true);
-      } else {
-        indexData(e, hit);
-      }
-    }
-  };
-
   /**
    * The following code works fine on dev but not on prod.
    */
@@ -105,23 +89,14 @@ const Canvas = ({
         setCooldown(true);
       }
 
-      huge
-        ? await fetch(`/api/indexDataHuge`, {
-            method: "POST",
-            body: JSON.stringify({
-              objectID: hit.objectID,
-              bg_color: pickedColor,
-              id: hit.id,
-            }),
-          })
-        : await fetch(`/api/indexData`, {
-            method: "POST",
-            body: JSON.stringify({
-              objectID: hit.objectID,
-              bg_color: pickedColor,
-              id: hit.id,
-            }),
-          });
+      await fetch(`/api/indexData`, {
+        method: "POST",
+        body: JSON.stringify({
+          objectID: hit.objectID,
+          bg_color: pickedColor,
+          id: hit.id,
+        }),
+      });
     }
   };
 
@@ -206,11 +181,7 @@ const Canvas = ({
                           }}
                           data-cell-id={hit.id}
                           key={hit.objectID}
-                          onClick={(e) =>
-                            useApiRoute
-                              ? handleClickThroughApiRoute(e, hit)
-                              : handleClick(e, hit)
-                          }
+                          onClick={(e) => handleClickThroughApiRoute(e, hit)}
                           style={{
                             background: hit.bg_color,
                             outline: showGrid

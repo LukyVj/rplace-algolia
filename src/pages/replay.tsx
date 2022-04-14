@@ -12,7 +12,7 @@ import { snaptshotType } from "../types/snaptshot";
 
 const COOLDOWN_SECONDS = null;
 
-const Home: NextPage = () => {
+const Replay: NextPage = () => {
   const [pickedColor, setPickedColor] = useState("#FFFFFF");
   const [showGrid, setShowGrid] = useState(false);
 
@@ -42,14 +42,13 @@ const Home: NextPage = () => {
     coordinates: { x: string; y: string };
   } | null>(null);
   let snapshotsHits: snaptshotType[] = [];
-  const [isExplorer, setIsExplorer] = useState(false);
+  const [isExplorer, setIsExplorer] = useState(true);
   const [allSnapshots, setAllSnapshots] = useState<snaptshotType[] | null>(
     null
   );
   const [maxSnapshot, setMaxSnapshot] = useState<number>(0);
   const [selectedSnapshot, setSelectedSnapshot] = useState<number>(0);
   const [replay, setReplay] = useState<boolean>(false);
-  const [currentFrame, setCurrentFrame] = useState<number>(0);
   const [hasDisclaimer, setHasDisclaimer] = useState(true);
 
   useEffect(() => {
@@ -303,4 +302,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Replay;
