@@ -65,15 +65,6 @@ const Canvas = ({
     }
   }, [allHits]);
 
-  const indexData = (e: any, hit: hitType) => {
-    (e.target as HTMLDivElement).style.background = pickedColor || "";
-    index.saveObject({
-      objectID: hit.objectID,
-      bg_color: pickedColor,
-      id: hit.id,
-    });
-  };
-
   /**
    * The following code works fine on dev but not on prod.
    */
@@ -136,6 +127,26 @@ const Canvas = ({
           getCoords(e);
         }}
       >
+        <div
+          style={{
+            display: "none",
+            width: 200,
+            height: 400,
+            top: 120,
+            right: -5,
+            opacity: 0.5,
+            pointerEvents: "none",
+            userSelect: "none",
+            overflow: "hidden",
+          }}
+          className="pos-absolute w-200"
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg"
+            className="w-100p"
+            style={{ transform: "scale(2)" }}
+          ></img>
+        </div>
         {isLoading ? (
           <>
             <h2
