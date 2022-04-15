@@ -21,6 +21,12 @@ interface CanvasProps {
   huge?: boolean;
 }
 
+/**
+ * The canvas will refetch data only when the canvasHover props is set to true
+ * On mouse over it'll be true and on mouse out it'll be false
+ *
+ */
+
 const Canvas = ({
   pickedColor,
   index,
@@ -41,9 +47,10 @@ const Canvas = ({
   const [loaderColor] = useState(
     colors[Math.floor(Math.random() * colors.length)]
   );
+  const [canvasHovered, setCanvasHovered] = useState(true);
 
   useEffect(() => {
-    if (index) {
+    if (index && canvasHovered) {
       const id = setInterval(() => {
         let hits: Object[] = [];
         index
@@ -63,7 +70,7 @@ const Canvas = ({
         setIsLoading && setIsLoading(false);
       };
     }
-  }, [allHits]);
+  }, [allHits, canvasHovered]);
 
   /**
    * The following code works fine on dev but not on prod.
@@ -125,9 +132,11 @@ const Canvas = ({
         }}
         onMouseOver={(e) => {
           getCoords(e);
+          setCanvasHovered(true);
         }}
+        onMouseLeave={() => setCanvasHovered(false)}
       >
-        <div
+        {/* <div
           style={{
             display: "none",
             width: 200,
@@ -145,7 +154,7 @@ const Canvas = ({
             src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg"
             className="w-100p"
           ></img>
-        </div>
+        </div> */}
         {isLoading ? (
           <>
             <h2
