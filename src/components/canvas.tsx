@@ -19,6 +19,7 @@ interface CanvasProps {
   isSnapshot?: boolean;
   snapshot?: snaptshotType;
   huge?: boolean;
+  moderation?: boolean;
 }
 
 /**
@@ -39,18 +40,22 @@ const Canvas = ({
   isSnapshot,
   snapshot,
   huge,
+  moderation,
 }: CanvasProps) => {
   const [allHits, setAllHits] = useState<Object[]>([]);
 
   const canvas = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-  const canvasSize = 4020;
+  const canvasSize = 4020; // Size of each small canvas
   const [loaderColor] = useState(
     colors[Math.floor(Math.random() * colors.length)]
   );
   const [canvasHovered, setCanvasHovered] = useState(true);
+  const [tabHasFocus, setTabHasFocus] = useState(false);
+  const [shouldFetch, setShouldFetch] = useState(true);
+  const [canvasSleeping, setCanvasSleeping] = useState(false);
 
   useEffect(() => {
-    if (index && canvasHovered) {
+    if (index && shouldFetch) {
       const id = setInterval(() => {
         let hits: Object[] = [];
         index
@@ -70,7 +75,36 @@ const Canvas = ({
         setIsLoading && setIsLoading(false);
       };
     }
-  }, [allHits, canvasHovered]);
+  }, [allHits, shouldFetch]);
+
+  useEffect(() => {
+    if (document.hasFocus()) {
+      setTabHasFocus(true);
+    } else {
+      setTabHasFocus(false);
+    }
+
+    if (tabHasFocus) {
+      setShouldFetch(true);
+    } else {
+      setShouldFetch(false);
+    }
+  }, [canvasHovered, tabHasFocus]);
+
+  useEffect(() => {
+    if (!canvasHovered) {
+      const timeout = setInterval(() => {
+        setShouldFetch(false);
+        setCanvasSleeping(moderation ? false : true);
+      }, 10 * 1000);
+
+      return () => {
+        clearInterval(timeout);
+      };
+    } else {
+      setCanvasSleeping(false);
+    }
+  }, [canvasHovered]);
 
   /**
    * The following code works fine on dev but not on prod.
@@ -136,6 +170,23 @@ const Canvas = ({
         }}
         onMouseLeave={() => setCanvasHovered(false)}
       >
+        {canvasSleeping && (
+          <div
+            className="pos-absolute us-none pe-none z-5"
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              textAlign: "center",
+            }}
+          >
+            <h2>The canvas is inacitve, hover it to activate it</h2>
+            <p>
+              This was made in order to avoid fetching data from Algolia if the
+              canvas isn't being used
+            </p>
+          </div>
+        )}
         {/* <div
           style={{
             display: "none",
@@ -176,7 +227,10 @@ const Canvas = ({
               <div
                 className="canvas"
                 key={c}
-                style={{ order: c === 2 ? 3 : c === 3 ? 4 : c === 4 ? 2 : c }}
+                style={{
+                  order: c === 2 ? 3 : c === 3 ? 4 : c === 4 ? 2 : c,
+                  opacity: canvasSleeping ? 0.05 : 1,
+                }}
               >
                 {isSnapshot && snapshot?.snapshot
                   ? snapshot.snapshot
@@ -200,7 +254,11 @@ const Canvas = ({
                           }}
                           data-cell-id={hit.id}
                           key={hit.objectID}
-                          onClick={(e) => handleClickThroughApiRoute(e, hit)}
+                          onClick={(e) =>
+                            moderation
+                              ? e.preventDefault()
+                              : handleClickThroughApiRoute(e, hit)
+                          }
                           style={{
                             background: hit.bg_color,
                             outline: showGrid
