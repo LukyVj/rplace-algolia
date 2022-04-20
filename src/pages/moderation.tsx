@@ -70,16 +70,16 @@ const Home: NextPage = () => {
     const toClean: any = [];
     var inputs = document.querySelectorAll("[data-cell-id]");
     for (var i = 0; i < inputs.length; i++) {
-      inputs[i].addEventListener("click", function () {
-        toClean.push({
-          objectID: this.dataset.cellId,
-          id: parseInt(this.dataset.cellId),
-          bg_color: "#FFF",
-        });
-        console.log(toClean);
+      inputs[i].addEventListener("click", function (this: HTMLDivElement) {
+        this.dataset &&
+          toClean.push({
+            objectID: this.dataset.cellId,
+            id: parseInt(this.dataset.cellId!),
+            bg_color: "#FFF",
+          });
+        console.log("copy this object: ", { toClean });
       });
     }
-    console.log(toClean);
   }, []);
 
   return (

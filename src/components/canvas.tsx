@@ -77,17 +77,16 @@ const Canvas = ({
     }
   }, [allHits, shouldFetch]);
 
+  // The following code doesn't seem to work
   useEffect(() => {
     if (document.hasFocus()) {
       setTabHasFocus(true);
+      setShouldFetch(true);
+      console.log("tab has focus");
     } else {
       setTabHasFocus(false);
-    }
-
-    if (tabHasFocus) {
-      setShouldFetch(true);
-    } else {
       setShouldFetch(false);
+      console.log("tab lost focus");
     }
   }, [canvasHovered, tabHasFocus]);
 
