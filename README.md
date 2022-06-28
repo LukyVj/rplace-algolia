@@ -2,6 +2,8 @@
 
 <img width="1120" alt="Screenshot 2022-04-11 at 18 13 11" src="https://user-images.githubusercontent.com/1630200/162784451-6e3e45e6-38f8-4ec2-8458-f43a28644afe.png">
 
+## :link: [Read the blog post on Algolia's blog](https://www.algolia.com/blog/engineering/how-i-recreated-r-place-with-algolia/)
+
 This experiment is a canvas built entirely with Algolia.
 
 It has some flaws, but it shows the power of Algolia, how fast it is, and how playful it can be.
