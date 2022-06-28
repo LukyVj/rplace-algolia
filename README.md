@@ -1,6 +1,6 @@
 # r/place inspired canvas built with Algolia
 
-<img width="1120" alt="Screenshot 2022-04-11 at 18 13 11" src="https://user-images.githubusercontent.com/1630200/162784451-6e3e45e6-38f8-4ec2-8458-f43a28644afe.png">
+<img width="826" alt="Screenshot 2022-06-28 at 09 20 30" src="https://user-images.githubusercontent.com/1630200/176118024-9e96ff1f-278b-4df4-a851-ee832941b3b7.png">
 
 ## :link: [Read the blog post on Algolia's blog](https://www.algolia.com/blog/engineering/how-i-recreated-r-place-with-algolia/)
 
